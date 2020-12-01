@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<meta charset="utf-8">
+<title>course</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+<!-- Place your content here -->
+<div ng-app = "myApp" ng-controller = "myCon">
+	<div>
+		<button ng-click = "showAllCourses()">Get all available courses</button>
+	</div>
+	<div>
+		<input type = "text" ng-model = "code_subject" placeholder="input the subject code">
+		<button ng-click = "getCodesByGivenSubject()">Get all codes under this subject</button>
+	</div>
+	<div>
+		<input type = "text" ng-model = "time_subject" placeholder="subject code">
+		<input type = "text" ng-model = "time_course" placeholder="course code">
+		<input type = "text" ng-model = "time_component" placeholder="component code">
+		<button ng-click = "getTimeEntry()">Get time entry by given info</button>
+	</div>
+	<div>
+		<input type = "text" ng-model = "inputschedule" placeholder="input the schedule name">
+		<button ng-click = "addSchedule()">Add this schedule</button>
+		<button ng-click = "showSchedule()">Get all pairs in this schedule</button>
+		<button ng-click = "deleteSchedule()">Delete this schedule</button>
+		<button ng-click = "deleteAllSchedules()">Delete all schedules</button>
+	</div>
+
+	<div>
+		<input type = "text" ng-model = "pair_schedule" placeholder="input the schedule name">
+		<input type = "text" ng-model = "pair_subject" placeholder="input the subject code">
+		<input type = "text" ng-model = "pair_course" placeholder="input the course code">
+		<input type = "text" ng-model = "pair_starttime" placeholder="input the start time">
+		<input type = "text" ng-model = "pair_endtime" placeholder="input the end time">
+		<button ng-click = "addtoList()">Add this pairs to list</button>
+		<button ng-click = "addtoSchedule()">Add this list to schedule</button>
+	</div>
+	<div>
+		<button ng-click = "getAllSchedules()">Get all schedules name and the number of courses in them</button>
+	</div>
+
+
+
+	<table id = "course_table" ng-show = "curTable == 'allcourses'">
+		<tr>
+			<th> subject</th>
+			<th> Description</th>
+		</tr>
+		<tr ng-repeat = "x in allcourses">
+			<td> {{x.subject}}</td>
+			<td> {{x.description}}</td>
+		</tr>
+	</table>
+
+	<table id = "codes_table" ng-show = "curTable == 'codes_table'">
+		<tr>
+			<th> Codes</th>
+		</tr>
+		<tr ng-repeat = "x in codesbysubject">
+			<td> {{x.codes}}</td>
+		</tr>
+	</table>
+
+	<table id = "time_table" ng-show = "curTable == 'time_table'">
+		<tr>
+			<th>Start_time</th>
+			<th>End_time</th>
+			<th>Days</th>
+			<th>Component</th>
+		</tr>
+		<tr ng-repeat = "x in timetable">
+			<td> {{x.start_time}}</td>
+			<td> {{x.end_time}}</td>
+			<td> {{x.days}}</td>
+			<td> {{x.component}}</td>
+		</tr>
+	</table>
+
+	<table id = "schedule_detail_table" ng-show = "curTable == 'schedule_detail_table'">
+		<tr>
+			<th>Subject</th>
+			<th>Course</th>
+			<th>Start_time</th>
+			<th>End_time</th>
+		</tr>
+		<tr ng-repeat = "x in schedule_detail">
+			<td> {{x.subject}}</td>
+			<td> {{x.catalog_nbr}}</td>
+			<td> {{x.start_time}}</td>
+			<td> {{x.end_time}}</td>
+		</tr>
+	</table>
+
+	<table id = "schedule_count_table" ng-show = "curTable == 'schedule_count_table'">
+		<tr>
+			<th>Schedule</th>
+			<th>Count</th>
+		</tr>
+		<tr ng-repeat = "x in schedule_counts">
+			<td> {{x.schedule}}</td>
+			<td> {{x.count}}</td>
+		</tr>
+	</table>
+</div>
+
+
+<!-- Embedded JavaScript go here -->
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src = "course.js"></script>
+
+</body>
+</html>
+
