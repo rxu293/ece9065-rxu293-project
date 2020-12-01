@@ -16,9 +16,10 @@ const FileSync = require('lowdb/adapters/FileSync');
 
 const adapter = new FileSync('data/Lab3-timetable-data2.json');
 const schedule_adapter = new FileSync('data/schedule.json');
+const user_adapter = new FileSync('data/user.json');
 const db = low(adapter);
 const sche_db = low(schedule_adapter);
-
+const user_db = low(user_adapter);
 
 //server files in static folder at root URL '/'
 app.use('/', express.static('static'));
@@ -31,6 +32,87 @@ router.use((req, res, next) =>{
 })
 router.use(express.json());
 
+
+//login verify
+router.get('/api/login/:username/:pwd', (req, res) =>{
+	console.log('login test');
+});
+
+//non authenticated user
+//3.b + 3.c search by combination
+router.get('/api/open/courses/:subject/:catalog_nbr', (req, res) =>{
+	let subjectcode = req.params.subject;
+	let catacode = req.params.catalog_nbr;
+	if (Number(catacode)) catacode = Number(catacode);
+	let data = [];
+	let time = [];
+	let courses = [];
+	data = db.get("courses").filter({subject : subjectcode}).
+	filter({catalog_nbr : catacode}).map("course_info").value();
+	for (i = 0; i < data.length; i++)
+	{
+		let course = data[i][0];
+		courses.push(course);
+	}
+	console.log(courses);
+	if (courses.length > 0)
+        res.send(getTimes(courses));
+    else{
+    	let msg = {msg: 'based on the given infomation, the course was not found'}
+        res.status(404).send(msg);
+    }
+});
+
+//3.d search by keywords
+router.get('/api/open/search/:keywords', (req, res) =>{
+	console.log('3.d test');
+});
+
+//3.f List of public course lists (up to 10)
+router.get('/api/open/schedules', (req, res) =>{
+	console.log('3.f test');
+});
+
+
+//authenticated user
+//4.a create schedules
+router.post('/api/secure/schedule', (req, res) =>{
+	console.log('4.a test');
+});
+
+//4.f edit a schedule
+router.post('/api/secure/schedule/:schedulename', (req, res) =>{
+	console.log('4.f test');
+});
+
+//4.g delete a schedule
+router.delete('/api/secure/schedule/:schedulename', (req, res) =>{
+	console.log('4.g test');
+});
+
+//4.h add a review for a course
+router.post('/api/secure/review/:catalog_nbr', (req, res) =>{
+	console.log('4.g test');
+});
+
+//admin
+//5.b grant privilige to other user
+router.post('/api/admin/privilige/:username', (req, res) =>{
+	console.log('5.b test');
+});
+
+//5.c change hidden flag for a course
+router.post('/api/admin/review/:reviewname', (req, res) =>{
+	console.log('5.c test');
+});
+
+//5.d    
+router.post('/api/admin/userstatus/:username', (req, res) =>{
+	console.log('5.c test');
+});
+
+
+/*
 //1. get all courses subject and classnames
 router.get('/courses', (req,res) =>{
 	let subjects = db.get("courses").map("subject").value();
@@ -250,7 +332,7 @@ function getTimesForComponent(course_info)
 	}
 	return ret;
 }
-
+*/
 
 app.use('/api',router);
 
