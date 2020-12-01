@@ -34,13 +34,13 @@ router.use(express.json());
 
 
 //login verify
-router.get('/api/login/:username/:pwd', (req, res) =>{
+router.get('/login/:username/:pwd', (req, res) =>{
 	console.log('login test');
 });
 
 //non authenticated user
 //3.b + 3.c search by combination
-router.get('/api/open/courses/:subject/:catalog_nbr', (req, res) =>{
+router.get('/open/courses/:subject/:catalog_nbr', (req, res) =>{
 	let subjectcode = req.params.subject;
 	let catacode = req.params.catalog_nbr;
 	if (Number(catacode)) catacode = Number(catacode);
@@ -64,51 +64,51 @@ router.get('/api/open/courses/:subject/:catalog_nbr', (req, res) =>{
 });
 
 //3.d search by keywords
-router.get('/api/open/search/:keywords', (req, res) =>{
+router.get('/open/search/:keywords', (req, res) =>{
 	console.log('3.d test');
 });
 
 //3.f List of public course lists (up to 10)
-router.get('/api/open/schedules', (req, res) =>{
+router.get('/open/schedules', (req, res) =>{
 	console.log('3.f test');
 });
 
 
 //authenticated user
 //4.a create schedules
-router.post('/api/secure/schedule', (req, res) =>{
+router.post('/secure/schedule', (req, res) =>{
 	console.log('4.a test');
 });
 
 //4.f edit a schedule
-router.post('/api/secure/schedule/:schedulename', (req, res) =>{
+router.post('/secure/schedule/:schedulename', (req, res) =>{
 	console.log('4.f test');
 });
 
 //4.g delete a schedule
-router.delete('/api/secure/schedule/:schedulename', (req, res) =>{
+router.delete('/secure/schedule/:schedulename', (req, res) =>{
 	console.log('4.g test');
 });
 
 //4.h add a review for a course
-router.post('/api/secure/review/:catalog_nbr', (req, res) =>{
+router.post('/secure/review/:catalog_nbr', (req, res) =>{
 	console.log('4.g test');
 });
 
 //admin
 //5.b grant privilige to other user
-router.post('/api/admin/privilige/:username', (req, res) =>{
+router.post('/admin/privilige/:username', (req, res) =>{
 	console.log('5.b test');
 });
 
 //5.c change hidden flag for a course
-router.post('/api/admin/review/:reviewname', (req, res) =>{
+router.post('/admin/review/:reviewname', (req, res) =>{
 	console.log('5.c test');
 });
 
-//5.d    
-router.post('/api/admin/userstatus/:username', (req, res) =>{
-	console.log('5.c test');
+//5.d change status for a user 
+router.post('/admin/userstatus/:username', (req, res) =>{
+	console.log('5.d test');
 });
 
 
