@@ -48,23 +48,23 @@ router.post('/login', (req, res) =>{
 
 //non authenticated user
 //3.b + 3.c search by combination
-router.get('/open/courses/:subject/:catalog_nbr', (req, res) =>{
-	let subjectcode = req.params.subject;
-	let catacode = req.params.catalog_nbr;
+router.get('/open/courses', (req, res) =>{
+	let subjectcode = req.body.subject;
+	let catacode = req.body.catalog_nbr;
+	if (catacode[4]) catacode = catacode.slice(0,-1) + catacode[4].toUpperCase();
 	if (Number(catacode)) catacode = Number(catacode);
 	let data = [];
 	let time = [];
 	let courses = [];
-	data = db.get("courses").filter({subject : subjectcode}).
-	filter({catalog_nbr : catacode}).map("course_info").value();
-	for (i = 0; i < data.length; i++)
-	{
-		let course = data[i][0];
-		courses.push(course);
-	}
-	console.log(courses);
-	if (courses.length > 0)
-        res.send(getTimes(courses));
+	if (subjectcode && catacode)
+		data = db.get("courses").filter({subject : subjectcode}).
+		filter({catalog_nbr : catacode}).value();
+	else if (!catacode)
+		data = db.get("courses").filter({subject : subjectcode}).value();
+	else
+		data = db.get("courses").filter({catalog_nbr : catacode}).value();
+	if (data.length > 0)
+        res.send(data);
     else{
     	let msg = {msg: 'based on the given infomation, the course was not found'}
         res.status(404).send(msg);
@@ -330,7 +330,7 @@ router.delete('/schedule', (req, res) => {
 	let msg = {msg: "deleted all schedules successfully"};
 	res.send(msg);
 });
-
+*/
 //for getting the start_time and end_time for a given course
 function getTimes(course_info)
 {
@@ -338,10 +338,10 @@ function getTimes(course_info)
 	for (i = 0; i < course_info.length; i++)
 	{
 		let times = {
-			start_time: course_info[i][0].start_time, 
-			end_time: course_info[i][0].end_time,
-			days: course_info[i][0].days,
-			component: course_info[i][0].ssr_component
+			start_time: course_info[i].start_time, 
+			end_time: course_info[i].end_time,
+			days: course_info[i].days,
+			component: course_info[i].ssr_component
 		};
 		ret.push(times);
 	}
@@ -364,7 +364,7 @@ function getTimesForComponent(course_info)
 	}
 	return ret;
 }
-*/
+
 
 app.use('/api',router);
 
