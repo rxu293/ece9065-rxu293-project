@@ -72,7 +72,23 @@ router.get('/open/courses', (req, res) =>{
 });
 
 //3.d search by keywords
-router.get('/open/search/:keywords', (req, res) =>{
+router.get('/open/search/:keyword', (req, res) =>{
+	let keyword = req.params.keyword;
+	let reg = new RegExp(keyword,"i");
+	console.log(keyword);
+	data = db.get("courses").value();
+	let ret = [];
+	for (i = 0; i < data.length; i++)
+	{
+		if (reg.test(data[i].className) || reg.test(data[i].catalog_nbr))
+			ret.push(data[i]);
+	}
+	if (ret.length > 0)
+        res.send(ret);
+    else{
+    	let msg = {msg: 'based on the given infomation, the course was not found'}
+        res.status(404).send(msg);
+    }
 
 });
 
