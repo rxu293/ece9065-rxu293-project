@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const router = express.Router();
 const port = 3000;
+const jwt = require('jsonwebtoken');
 let allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Headers', "*");
@@ -34,8 +36,14 @@ router.use(express.json());
 
 
 //login verify
-router.get('/login/:username/:pwd', (req, res) =>{
-	console.log('login test');
+router.post('/login', (req, res) =>{
+	const username = req.body.username;
+	const user = {name: username};
+	const password = req.body.password;
+	const pwd = {pwd:password};
+	console.log(user);
+	const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+	res.json({accessToken:accessToken});
 });
 
 //non authenticated user
@@ -65,7 +73,7 @@ router.get('/open/courses/:subject/:catalog_nbr', (req, res) =>{
 
 //3.d search by keywords
 router.get('/open/search/:keywords', (req, res) =>{
-	console.log('3.d test');
+
 });
 
 //3.f List of public course lists (up to 10)
@@ -76,8 +84,19 @@ router.get('/open/schedules', (req, res) =>{
 
 //authenticated user
 //4.a create schedules
-router.post('/secure/schedule', (req, res) =>{
-	console.log('4.a test');
+router.post('/secure/schedule',authenticateToken, (req, res) =>{
+	const posts = [
+	{
+		username: 'kyle',
+		title: 'post1'
+	},
+	{
+		username: 'Jim',
+		title: 'Post2'
+	}
+	]
+	console.log(req.user.name);
+	res.json(posts.filter(post => post.username === req.user.name));	
 });
 
 //4.f edit a schedule
@@ -92,7 +111,7 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 
 //4.h add a review for a course
 router.post('/secure/review/:catalog_nbr', (req, res) =>{
-	console.log('4.g test');
+	console.log('4.h test');
 });
 
 //admin
@@ -101,8 +120,8 @@ router.post('/admin/privilige/:username', (req, res) =>{
 	console.log('5.b test');
 });
 
-//5.c change hidden flag for a course
-router.post('/admin/review/:reviewname', (req, res) =>{
+//5.c change hidden flag for a review
+router.post('/admin/review/:reviewid', (req, res) =>{
 	console.log('5.c test');
 });
 
@@ -111,6 +130,19 @@ router.post('/admin/userstatus/:username', (req, res) =>{
 	console.log('5.d test');
 });
 
+//token authentication
+function authenticateToken(req, res, next){
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
+	if (token == null) return res.sendStatus(401);
+
+	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+		if (err) return res.sendStatus(403);
+		req.user = user;
+		console.log(user);
+		next(); 
+	})
+}
 
 /*
 //1. get all courses subject and classnames
