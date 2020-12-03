@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+var stringSimilarity = require('string-similarity');
 const app = express();
 const router = express.Router();
 const port = 3000;
@@ -73,14 +74,16 @@ router.get('/open/courses', (req, res) =>{
 
 //3.d search by keywords
 router.get('/open/search/:keyword', (req, res) =>{
-	let keyword = req.params.keyword;
+	let keyword = req.params.keyword.split(' ').join('');
 	let reg = new RegExp(keyword,"i");
 	console.log(keyword);
 	data = db.get("courses").value();
 	let ret = [];
 	for (i = 0; i < data.length; i++)
 	{
-		if (reg.test(data[i].className) || reg.test(data[i].catalog_nbr))
+		if (reg.test(data[i].className) || reg.test(data[i].catalog_nbr) || 
+			stringSimilarity.compareTwoStrings(keyword, data[i].className) > 0.5 ||
+			stringSimilarity.compareTwoStrings(keyword, (data[i].catalog_nbr.toString())) > 0.5)
 			ret.push(data[i]);
 	}
 	if (ret.length > 0)
@@ -94,7 +97,25 @@ router.get('/open/search/:keyword', (req, res) =>{
 
 //3.f List of public course lists (up to 10)
 router.get('/open/schedules', (req, res) =>{
-	console.log('3.f test');
+	let data = sche_db.value();
+	let keys = Object.keys(data);
+	let ret = [];
+	for (i = 0; i < keys.length; ++i)
+	{
+		let sche = sche_db.get(keys[i]).value();
+		if (sche[0].visibility == "public")
+		ret.push(sche);
+	}
+	ret.sort(function(a,b){
+		if (a[0].modified_time < b[0].modified_time)
+			return 1;
+		else return -1;
+	})
+	console.log(ret);
+	if (ret.length <= 10)
+		res.send(ret);
+	else
+		res.send(ret.slice(0,10));
 });
 
 

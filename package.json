@@ -27,7 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "lowdb": "^1.0.0",
-    "simple-json-db": "^1.2.2"
+    "simple-json-db": "^1.2.2",
+    "string-similarity": "^4.0.3"
   },
   "devDependencies": {},
   "keywords": []
