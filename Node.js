@@ -135,7 +135,7 @@ router.post('/secure/schedule', (req, res) =>{
 		let data =
 		{
 			"name": schedulename,		
-  	  		"creator": req.body.creator,
+  	  		"creator": user,
   	  		"modified_time": Date.now(),
   	  		"description": req.body.description,
   	  		"visibility": req.body.visibility
@@ -179,8 +179,15 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 	} 
 	else
 	{
-		sche_db.unset(schedulename).write();
-		let msg = {msg: "successfully delete schedule '" + schedulename + "'"}
+		if (sche_db.get(schedulename).filter({creator:user}).value())
+		{
+			sche_db.unset(schedulename).write();
+			let msg = {msg: "successfully delete schedule '" + schedulename + "'"};
+		}
+		else
+		{
+			let msg ={msg:"you are trying to delete someone else's schedule"};
+		}
 		res.send(msg);
 	}
 });
@@ -191,7 +198,7 @@ router.post('/secure/review', (req, res) =>{
 		{
 			"catalog_nbr": req.body.catalog_nbr,
 	  		"subject": req.body.subject,
-	  		"creator": req.body.creator,
+	  		"creator": user,
 	  		"visibility": req.body.visibility,
 	  		"modified_time": Date.now(),
 	  		"content": req.body.content
