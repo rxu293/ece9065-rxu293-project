@@ -92,7 +92,6 @@ router.get('/open/search/:keyword', (req, res) =>{
     	let msg = {msg: 'based on the given infomation, the course was not found'}
         res.status(404).send(msg);
     }
-
 });
 
 //3.f List of public course lists (up to 10)
@@ -148,8 +147,23 @@ router.post('/secure/schedule', (req, res) =>{
 
 //4.f edit a schedule
 router.post('/secure/schedule/:schedulename', (req, res) =>{
-	console.log('4.f test');
-
+	let schedulename = req.params.schedulename;
+	let pairs = req.body.pairs
+	let header = pairs[0];
+	header.modified_time = Date.now();
+	sche_db.set(schedulename,[header]).write();
+	if (pairs.length > 1)
+	{
+		for (i = 1; i < pairs.length; i ++)
+			{
+				sche_db.get(schedulename).
+				push({subject:pairs[i].subject,catalog_nbr:pairs[i].catalog_nbr,
+					start_time:pairs[i].start_time,end_time:pairs[i].end_time,
+					term:pairs[i].term,year:pairs[i].year}).write();
+			}
+	}
+	let msg = {msg: 'edited successfully'}
+	res.send(msg);
 });
 
 //4.g delete a schedule

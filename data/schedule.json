@@ -3,7 +3,7 @@
     {
       "name": "sche1",
       "creator": "testuser1",
-      "modified_time": 1606984158914,
+      "modified_time": 1607070020411,
       "description": "testuser1's schedule",
       "visibility": "public"
     },
@@ -11,9 +11,17 @@
       "subject": "KOREAN",
       "catalog_nbr": "3214",
       "start_time": "9:00",
-      "end_time": "11:00",
+      "end_time": "12:00",
       "term": "E",
       "year": 1
+    },
+    {
+      "subject": "JAPANESE",
+      "catalog_nbr": "3114",
+      "start_time": "7:00",
+      "end_time": "11:00",
+      "term": "F",
+      "year": 2
     }
   ],
   "sche2": [
