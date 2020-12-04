@@ -121,24 +121,35 @@ router.get('/open/schedules', (req, res) =>{
 
 //authenticated user
 //4.a create schedules
-router.post('/secure/schedule',authenticateToken, (req, res) =>{
-	const posts = [
+router.post('/secure/schedule', (req, res) =>{
+	let schedulename = req.body.schedule_name;
+	let existFlag = sche_db.get(schedulename).value();
+	if (existFlag)
 	{
-		username: 'kyle',
-		title: 'post1'
-	},
+		let msg = {msg : 'the given schedule name can not be created, because there is already a same schedule name existing' }
+		res.status(400)
+		.send(msg);
+	} 
+	else
 	{
-		username: 'Jim',
-		title: 'Post2'
+		let data =
+		{
+			"name": schedulename,		
+  	  		"creator": req.body.creator,
+  	  		"modified_time": Date.now(),
+  	  		"description": req.body.description,
+  	  		"visibility": req.body.visibility
+		}
+		sche_db.set(schedulename, [data]).write();
+		let msg = {msg: 'added successfully'}
+		res.send(msg);
 	}
-	]
-	console.log(req.user.name);
-	res.json(posts.filter(post => post.username === req.user.name));	
 });
 
 //4.f edit a schedule
 router.post('/secure/schedule/:schedulename', (req, res) =>{
 	console.log('4.f test');
+
 });
 
 //4.g delete a schedule

@@ -1,12 +1,12 @@
 {
   "sche1": [
-  	{
-  	  "name": "sche1",
-  	  "creator": "testuser1",
-  	  "modified_time": 1606984158914,
-  	  "description": "testuser1's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche1",
+      "creator": "testuser1",
+      "modified_time": 1606984158914,
+      "description": "testuser1's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -17,13 +17,13 @@
     }
   ],
   "sche2": [
-  	{
-  	  "name": "sche2",
-  	  "creator": "testuser2",
-  	  "modified_time": 1606984158913,
-  	  "description": "testuser2's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche2",
+      "creator": "testuser2",
+      "modified_time": 1606984158913,
+      "description": "testuser2's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -34,13 +34,13 @@
     }
   ],
   "sche3": [
-  	{
-  	  "name": "sche3",	
-  	  "creator": "testuser3",
-  	  "modified_time": 1606984158924,
-  	  "description": "testuser3's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche3",
+      "creator": "testuser3",
+      "modified_time": 1606984158924,
+      "description": "testuser3's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -51,13 +51,13 @@
     }
   ],
   "sche4": [
-  	{
-  	  "name": "sche4",			
-  	  "creator": "testuser4",
-  	  "modified_time": 1606984158914,
-  	  "description": "testuser4's schedule",
-  	  "visibility": "private"
-  	},
+    {
+      "name": "sche4",
+      "creator": "testuser4",
+      "modified_time": 1606984158914,
+      "description": "testuser4's schedule",
+      "visibility": "private"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -68,14 +68,14 @@
     }
   ],
   "sche5": [
-  	{
-  	  "name": "sche5",	
-  	  "creator": "testuser5",
-  	  "modified_time": 1606984158910,
-  	  "description": "testuser5's schedule",
-  	  "visibility": "public"
-  	},
-    {	
+    {
+      "name": "sche5",
+      "creator": "testuser5",
+      "modified_time": 1606984158910,
+      "description": "testuser5's schedule",
+      "visibility": "public"
+    },
+    {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
       "start_time": "9:00",
@@ -85,13 +85,13 @@
     }
   ],
   "sche6": [
-  	{
-  	  "name": "sche6",		
-  	  "creator": "testuser6",
-  	  "modified_time": 1606984158914,
-  	  "description": "testuser6's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche6",
+      "creator": "testuser6",
+      "modified_time": 1606984158914,
+      "description": "testuser6's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -102,13 +102,13 @@
     }
   ],
   "sche7": [
-  	{
-  	  "name": "sche7",		
-  	  "creator": "testuser7",
-  	  "modified_time": 1606984158914,
-  	  "description": "testuser7's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche7",
+      "creator": "testuser7",
+      "modified_time": 1606984158914,
+      "description": "testuser7's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -119,13 +119,13 @@
     }
   ],
   "sche8": [
-  	{
-  	  "name": "sche8",	
-  	  "creator": "testuser8",
-  	  "modified_time": 1606984158914,
-  	  "description": "testuser8's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche8",
+      "creator": "testuser8",
+      "modified_time": 1606984158914,
+      "description": "testuser8's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -136,13 +136,13 @@
     }
   ],
   "sche9": [
-  	{
-  	  "name": "sche9",		
-  	  "creator": "testuser1",
-  	  "modified_time": 1606984158114,
-  	  "description": "testuser9's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche9",
+      "creator": "testuser1",
+      "modified_time": 1606984158114,
+      "description": "testuser9's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -153,13 +153,13 @@
     }
   ],
   "sche10": [
-  	{
-  	  "name": "sche10",		
-  	  "creator": "testuser10",
-  	  "modified_time": 1606984158014,
-  	  "description": "testuser10's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche10",
+      "creator": "testuser10",
+      "modified_time": 1606984158014,
+      "description": "testuser10's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -170,13 +170,13 @@
     }
   ],
   "sche11": [
-  	{
-  	  "name": "sche11",		
-  	  "creator": "testuser11",
-  	  "modified_time": 1606984158094,
-  	  "description": "testuser11's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche11",
+      "creator": "testuser11",
+      "modified_time": 1606984158094,
+      "description": "testuser11's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -187,13 +187,13 @@
     }
   ],
   "sche12": [
-  	{
-  	  "name": "sche12",		
-  	  "creator": "testuser12",
-  	  "modified_time": 1606984159014,
-  	  "description": "testuser12's schedule",
-  	  "visibility": "public"
-  	},
+    {
+      "name": "sche12",
+      "creator": "testuser12",
+      "modified_time": 1606984159014,
+      "description": "testuser12's schedule",
+      "visibility": "public"
+    },
     {
       "subject": "KOREAN",
       "catalog_nbr": "3214",
@@ -201,6 +201,15 @@
       "end_time": "11:00",
       "term": "E",
       "year": 1
+    }
+  ],
+  "test": [
+    {
+      "name": "test",
+      "creator": "testuser",
+      "modified_time": 1607048284582,
+      "description": "this is just a test",
+      "visibility": "public"
     }
   ]
 }
