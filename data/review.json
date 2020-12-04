@@ -1,0 +1,20 @@
+{
+  "reviews": [
+    {
+      "catalog_nbr": 2053,
+      "subject": "ACTURSCI",
+      "creator": "testuser1",
+      "visibility": "public",
+      "modified_time": 1607070020411,
+      "content": "I love this course"
+    },
+    {
+      "catalog_nbr": 2053,
+      "subject": "ACTURSCI",
+      "creator": "testuser2",
+      "visibility": "public",
+      "modified_time": 1607075477758,
+      "content": "awesome professor"
+    }
+  ]
+}

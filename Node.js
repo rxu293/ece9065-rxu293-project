@@ -20,9 +20,11 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('data/Lab3-timetable-data2.json');
 const schedule_adapter = new FileSync('data/schedule.json');
 const user_adapter = new FileSync('data/user.json');
+const review_adapter = new FileSync('data/review.json');
 const db = low(adapter);
 const sche_db = low(schedule_adapter);
 const user_db = low(user_adapter);
+const rv_db = low(review_adapter);
 
 //server files in static folder at root URL '/'
 app.use('/', express.static('static'));
@@ -110,7 +112,6 @@ router.get('/open/schedules', (req, res) =>{
 			return 1;
 		else return -1;
 	})
-	console.log(ret);
 	if (ret.length <= 10)
 		res.send(ret);
 	else
@@ -185,8 +186,19 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 });
 
 //4.h add a review for a course
-router.post('/secure/review/:catalog_nbr', (req, res) =>{
-	console.log('4.h test');
+router.post('/secure/review', (req, res) =>{
+	let data =
+		{
+			"catalog_nbr": req.body.catalog_nbr,
+	  		"subject": req.body.subject,
+	  		"creator": req.body.creator,
+	  		"visibility": req.body.visibility,
+	  		"modified_time": Date.now(),
+	  		"content": req.body.content
+		}
+	rv_db.get("reviews").push(data).write();
+	let msg = {msg: 'review added successfully'}
+	res.send(msg);
 });
 
 //admin
