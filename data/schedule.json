@@ -58,23 +58,6 @@
       "year": 1
     }
   ],
-  "sche4": [
-    {
-      "name": "sche4",
-      "creator": "testuser4",
-      "modified_time": 1606984158914,
-      "description": "testuser4's schedule",
-      "visibility": "private"
-    },
-    {
-      "subject": "KOREAN",
-      "catalog_nbr": "3214",
-      "start_time": "9:00",
-      "end_time": "11:00",
-      "term": "E",
-      "year": 1
-    }
-  ],
   "sche5": [
     {
       "name": "sche5",

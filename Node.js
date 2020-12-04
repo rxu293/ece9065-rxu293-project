@@ -168,7 +168,20 @@ router.post('/secure/schedule/:schedulename', (req, res) =>{
 
 //4.g delete a schedule
 router.delete('/secure/schedule/:schedulename', (req, res) =>{
-	console.log('4.g test');
+	let schedulename = req.params.schedulename;
+	let existFlag = sche_db.get(schedulename).value();
+	if (!existFlag)
+	{
+		let msg = {msg: 'the given schedule name was not found'}
+		res.status(404)
+		.send(msg);
+	} 
+	else
+	{
+		sche_db.unset(schedulename).write();
+		let msg = {msg: "successfully delete schedule '" + schedulename + "'"}
+		res.send(msg);
+	}
 });
 
 //4.h add a review for a course
