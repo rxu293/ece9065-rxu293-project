@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rxu293/ece9065-rxu293-lab3#readme",
   "dependencies": {
     "angular-route": "^1.6.9",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "collect": "^0.3.5",
     "cors": "^2.8.5",

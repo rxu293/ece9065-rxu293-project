@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "username": "testuser1",
+      "password": "$2y$10$XQBkgqYr7eoM1oZieGKOJeBgTulWWweK9Hnz7p0AZHyZ7FgrFG0Ty",
+      "status": "activated",
+      "level": "admin"
+    }
+  ]
+}

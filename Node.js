@@ -172,7 +172,7 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 	let schedulename = req.params.schedulename;
 	let existFlag = sche_db.get(schedulename).value();
 	if (!existFlag)
-	{
+	{   
 		let msg = {msg: 'the given schedule name was not found'}
 		res.status(404)
 		.send(msg);
@@ -186,7 +186,7 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 		}
 		else
 		{
-			let msg ={msg:"you are trying to delete someone else's schedule"};
+			let msg = {msg:"you are trying to delete someone else's schedule"};
 		}
 		res.send(msg);
 	}
@@ -211,7 +211,10 @@ router.post('/secure/review', (req, res) =>{
 //admin
 //5.b grant privilige to other user
 router.post('/admin/privilige/:username', (req, res) =>{
-	console.log('5.b test');
+	let username = req.params.username;
+	user_db.get("users").find({username:username}).assign({level:"admin"}).write();
+	let msg = {msg: 'successfully set user ' + username + ' as a site manager'};
+	res.send(msg);
 });
 
 //5.c change hidden flag for a review
