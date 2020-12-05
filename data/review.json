@@ -12,7 +12,7 @@
       "catalog_nbr": 2053,
       "subject": "ACTURSCI",
       "creator": "testuser2",
-      "visibility": "public",
+      "visibility": "hidden",
       "modified_time": 1607075477758,
       "content": "awesome professor"
     }

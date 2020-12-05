@@ -218,13 +218,25 @@ router.post('/admin/privilige/:username', (req, res) =>{
 });
 
 //5.c change hidden flag for a review
-router.post('/admin/review/:reviewid', (req, res) =>{
-	console.log('5.c test');
+router.post('/admin/review', (req, res) =>{
+	let catacode = req.body.catalog_nbr;
+	let subject = req.body.subject;
+	let time = req.body.modified_time;
+	let flag = req.body.flag;
+	rv_db.get("reviews").filter({catalog_nbr:catacode}).filter({subject:subject}).find({modified_time:time}).
+	assign({visibility:flag}).write();
+	let msg = {msg: "edited visibility to " + flag + " successfully"};
+	res.send(msg);
 });
 
 //5.d change status for a user 
 router.post('/admin/userstatus/:username', (req, res) =>{
-	console.log('5.d test');
+	let username = req.params.username;
+	let flag = req.body.flag;
+	user_db.get("users").find({username:username}).assign({status:flag}).write();
+	let msg = {msg: "edited status to " + flag + " successfully"};
+	res.send(msg);
+
 });
 
 //token authentication
