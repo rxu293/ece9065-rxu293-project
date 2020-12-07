@@ -253,7 +253,7 @@ function authenticateToken(req, res, next){
 	})
 }
 
-/*
+
 //1. get all courses subject and classnames
 router.get('/courses', (req,res) =>{
 	let subjects = db.get("courses").map("subject").value();
@@ -263,7 +263,7 @@ router.get('/courses', (req,res) =>{
 	});
     res.send(data);
 });
-
+/*
 //2. get all courses codes for a given subject
 router.get('/courses/:subject', (req, res) =>{
     let subjectcode = req.params.subject;
