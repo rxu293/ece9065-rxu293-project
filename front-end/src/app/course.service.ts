@@ -11,6 +11,7 @@ import { MessageService } from './message.service';
 export class courseService {
 
   private courseUrl = 'http://localhost:3000/api/open/courses';  // URL to web api
+  private keywordUrl = 'http://localhost:3000/api/open/search';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -26,6 +27,15 @@ export class courseService {
     const body = {subject : subject, catalog_nbr : catalog_nbr};
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<Course[]>(this.courseUrl, body, {headers})
+      .pipe(
+        tap(_ => this.log('fetched coursees')),
+        catchError(this.handleError<Course[]>('getcoursees', []))
+      );
+  }
+
+   getcoursebykeyword(keyword: string): Observable<Course[]> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.get<Course[]>(this.keywordUrl+"/"+keyword)
       .pipe(
         tap(_ => this.log('fetched coursees')),
         catchError(this.handleError<Course[]>('getcoursees', []))

@@ -21,6 +21,7 @@ export class CourseSearchComponent implements OnInit {
   reviews$: Observable<Review[]>;
   subject: string;
   catalog_nbr:string;
+  keyword: string;
   selectedCourse: Course;
   private searchTerms = new Subject<string>();
 
@@ -31,7 +32,12 @@ export class CourseSearchComponent implements OnInit {
     this.reviews$ = null;
     this.courses$ = this.courseService.getcourse(this.subject, this.catalog_nbr);
   }
-
+  
+  searchKeyword(): void{
+    this.selectedCourse = null;
+    this.reviews$ = null;
+    this.courses$ = this.courseService.getcoursebykeyword(this.keyword);
+  }
   onSelect(course:Course): void{
   	this.selectedCourse = course;
     this.reviews$ = this.reviewService.

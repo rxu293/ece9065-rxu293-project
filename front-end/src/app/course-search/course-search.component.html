@@ -5,6 +5,10 @@
   <label for="search-box">catalog_nbr:</label>
   <input #searchBox2 id="search-box-catalog_nbr" [(ngModel)] = "catalog_nbr"/>
   <button (click) = "searchCourse()">search for the course</button>
+  <h4><label for="search-box">Keyword Search</label></h4>
+  <label for="search-box">keyword:</label>
+  <input #searchBox3 id="search-box-keyword" [(ngModel)] = "keyword"/>
+  <button (click) = "searchKeyword()">search for the course by keyword</button>
   <table class="search-result">
       <tr>
           <th>Subject</th>
