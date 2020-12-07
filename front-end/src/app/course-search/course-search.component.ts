@@ -23,7 +23,6 @@ export class CourseSearchComponent implements OnInit {
   catalog_nbr:string;
   keyword: string;
   selectedCourse: Course;
-  private searchTerms = new Subject<string>();
 
   constructor(private courseService: courseService, private reviewService: reviewService) {}
 
@@ -38,6 +37,7 @@ export class CourseSearchComponent implements OnInit {
     this.reviews$ = null;
     this.courses$ = this.courseService.getcoursebykeyword(this.keyword);
   }
+  
   onSelect(course:Course): void{
   	this.selectedCourse = course;
     this.reviews$ = this.reviewService.

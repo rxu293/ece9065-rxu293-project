@@ -129,6 +129,7 @@ router.get('/open/schedules', (req, res) =>{
 	{
 		let sche = sche_db.get(keys[i]).value();
 		if (sche[0].visibility == "public")
+		sche[0].len = sche.length - 1;
 		ret.push(sche);
 	}
 	ret.sort(function(a,b){

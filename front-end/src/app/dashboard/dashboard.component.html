@@ -1,1 +1,38 @@
+ <h4><label for="search-box">Top Public Schdules</label></h4>
+ <button *ngIf = "selectedSchedule" (click) = "offSelect()">hide more info</button>
+ <table class="public-schedules">
+      <tr>
+          <th>Name</th>
+          <th>Creator name</th>
+          <th>Number of courses</th>
+          <th *ngIf = "selectedSchedule">Description</th>
+      </tr>
+      <tr *ngFor="let schedule of schedules$ | async" >
+        <td>{{schedule[0].name}}</td>
+        <td>{{schedule[0].creator}}</td>
+        <td>{{schedule[0].len}}</td>
+        <td *ngIf = "selectedSchedule">{{schedule[0].description}}</td>
+        <button (click) = "onSelect(schedule)">show more info</button>
+      </tr>
+ </table>
+ <div *ngIf = "selectedSchedule">
+ 	<table>
+ 	 <tr>
+          <th>Subject</th>
+          <th>Catalog_nbr</th>
+          <th>Start_time</th>
+          <th>End_time</th>
+          <th>Term</th>
+          <th>Year</th>
+     </tr>
+     <tr *ngFor="let c of selectedSchedule| slice: 1" >
+        <td>{{c.subject}}</td>
+        <td>{{c.catalog_nbr}}</td>
+        <td>{{c.start_time}}</td>
+        <td>{{c.end_time}}</td>
+        <td>{{c.term}}</td>
+        <td>{{c.year}}</td>   
+     </tr>
+   </table> 
+ </div>
 <app-course-search></app-course-search>
