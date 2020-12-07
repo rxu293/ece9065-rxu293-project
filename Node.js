@@ -10,7 +10,7 @@ let allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Headers', "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
-}
+} 
 app.use(allowCrossDomain);
 app.use(express.json({ limit: 20000 }));
 //setup the database
@@ -51,10 +51,10 @@ router.post('/login', (req, res) =>{
 
 //non authenticated user
 //3.b + 3.c search by combination
-router.get('/open/courses', (req, res) =>{
+router.post('/open/courses', (req, res) =>{
 	let subjectcode = req.body.subject;
 	let catacode = req.body.catalog_nbr;
-	if (catacode[4]) catacode = catacode.slice(0,-1) + catacode[4].toUpperCase();
+	if ((catacode) && (catacode[4])) catacode = catacode.slice(0,-1) + catacode[4].toUpperCase();
 	if (Number(catacode)) catacode = Number(catacode);
 	let data = [];
 	let time = [];

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Course } from '../courses';
+import { Course } from '../course';
 import { courseService } from '../course.service';
 
 @Component({

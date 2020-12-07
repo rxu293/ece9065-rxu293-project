@@ -13,11 +13,8 @@ export class DashboardComponent implements OnInit {
   constructor(private courseService: courseService) { }
 
   ngOnInit() {
-    this.getCourses();
   }
 
   getCourses(): void {
-    this.courseService.getcourse()
-      .subscribe(courses => this.courses = courses.slice(1, 5));
   }
 }

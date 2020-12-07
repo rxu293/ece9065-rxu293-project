@@ -10,10 +10,11 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class courseService {
 
-  private courseUrl = 'http://localhost:3000/api/courses';  // URL to web api
+  private courseUrl = 'http://localhost:3000/api/open/courses';  // URL to web api
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+
   };
 
   constructor(
@@ -21,8 +22,10 @@ export class courseService {
     private messageService: MessageService){}
 
   /** GET coursees from the server */
-  getcourse(): Observable<Course[]> {
-    return this.http.get<Course[]>(this.courseUrl)
+  getcourse(subject: string, catalog_nbr:string): Observable<Course[]> {
+    const body = {subject : subject, catalog_nbr : catalog_nbr};
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<Course[]>(this.courseUrl, body, {headers})
       .pipe(
         tap(_ => this.log('fetched coursees')),
         catchError(this.handleError<Course[]>('getcoursees', []))
