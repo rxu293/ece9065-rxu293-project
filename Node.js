@@ -74,6 +74,30 @@ router.post('/open/courses', (req, res) =>{
     }
 });
 
+//3.c get reviews related to a course
+router.post('/open/reviews', (req, res) =>{
+	let subjectcode = req.body.subject;
+	let catacode = req.body.catalog_nbr;
+	if ((catacode) && (catacode[4])) catacode = catacode.slice(0,-1) + catacode[4].toUpperCase();
+	if (Number(catacode)) catacode = Number(catacode);
+	let data = [];
+	let time = [];
+	let courses = [];
+	if (subjectcode && catacode)
+		data = rv_db.get("reviews").filter({subject : subjectcode}).
+		filter({catalog_nbr : catacode}).filter({visibility : "public"}).value();
+	for (i = 0; i < data.length; i++)
+	{
+		let st = new Date(data[i].modified_time).toISOString();
+		data[i].modified_time = st;
+	}
+	if (data.length > 0)
+        res.send(data);
+    else{
+    	let msg = {msg: 'based on the given infomation, the review was not found'}
+        res.status(404).send(msg);
+    }
+});
 //3.d search by keywords
 router.get('/open/search/:keyword', (req, res) =>{
 	let keyword = req.params.keyword.split(' ').join('');
