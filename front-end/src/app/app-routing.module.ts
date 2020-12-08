@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CoursesComponent } from './courses/courses.component';
-import { CourseDetailComponent} from './course-detail/course-detail.component';
-
+import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'detail/:subject/:catalog_nbr', component: CourseDetailComponent}
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
 ];
 
 @NgModule({

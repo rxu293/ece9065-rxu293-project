@@ -43,7 +43,6 @@ router.use(express.json());
 router.post('/signup', (req, res) =>{
 	let username = req.body.username;
 	let password = req.body.password;
-	let email = req.body.email;
 	let existFlag = user_db.get("users").find({username:username}).value();
 	if (existFlag)
 	{
@@ -51,30 +50,52 @@ router.post('/signup', (req, res) =>{
 		res.send(msg);
 	}
 	else{
-		const hashedpassword = bcrypt.hashSync(password, saltRounds);
+		let hashedpassword = bcrypt.hashSync(password, saltRounds);
 		let data =
 			{
 				"username": username,		
   	  			"password": hashedpassword,
-  	  			"status": "pending",
+  	  			"status": "active",
   	  			"level": "user",
-  	  			"email": email,
-  	  			"verifylink":""
+  	  			"verifylink":"emailverify/" + username
 			}
 		user_db.get("users").push(data).write();
-		let msg = {msg:"signup successfully, please verify your email"};
-		res.send("msg");
+		res.json({verifylink:data.verifylink, msg: "successfully signup, please click the link to verify"});
 	}	
 });
+
 //login
 router.post('/login', (req, res) =>{
 	const username = req.body.username;
 	const user = {name: username};
 	const password = req.body.password;
 	const pwd = {pwd:password};
-	console.log(user);
-	const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-	res.json({accessToken:accessToken});
+	let userdata = user_db.get("users").find({username:username}).value();
+	if (!userdata)
+	{
+		let msg = {msg: "user does not exist"};
+		res.send(msg);
+	}
+	if (userdata.status == "inactive")
+	{
+		let msg = {msg: "your account is not active, please contact site managers"};
+		res.send(msg);
+	}
+	if (userdata.status == "pending")
+	{
+		let msg = {msg: "please verify you account first"};
+		res.send(msg);
+	}
+	if ((userdata.username == username) && bcrypt.compareSync(password, userdata.password))
+	{
+		const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+		res.json({jwt:accessToken, msg: "successfully login", level: userdata.level});
+	}
+	else
+	{
+		let msg = {msg: "password is not correct"};
+		res.send(msg);
+	}
 });
 
 //non authenticated user
@@ -493,40 +514,6 @@ router.delete('/schedule', (req, res) => {
 	res.send(msg);
 });
 */
-//for getting the start_time and end_time for a given course
-function getTimes(course_info)
-{
-	let ret = [];
-	for (i = 0; i < course_info.length; i++)
-	{
-		let times = {
-			start_time: course_info[i].start_time, 
-			end_time: course_info[i].end_time,
-			days: course_info[i].days,
-			component: course_info[i].ssr_component
-		};
-		ret.push(times);
-	}
-	return ret;
-}
-
-//same with above but is used when having a componenet code
-function getTimesForComponent(course_info)
-{
-	let ret = [];
-	for (i = 0; i < course_info.length; i++)
-	{
-		let times = {
-			start_time: course_info[0].start_time, 
-			end_time: course_info[0].end_time,
-			days: course_info[0].days,
-			component: course_info[0].ssr_component
-		};
-		ret.push(times);
-	}
-	return ret;
-}
-
 
 app.use('/api',router);
 

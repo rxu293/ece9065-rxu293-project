@@ -10,6 +10,9 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CourseSearchComponent } from './course-search/course-search.component';
 import { MessagesComponent } from './messages/messages.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { LoginUserComponent } from './login-user/login-user.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { MessagesComponent } from './messages/messages.component';
     CourseDetailComponent,
     DashboardComponent,
     CourseSearchComponent,
-    MessagesComponent
+    MessagesComponent,
+    SignupComponent,
+    LoginComponent,
+    LoginUserComponent
   ],
   imports: [
     CommonModule,

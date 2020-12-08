@@ -1,15 +1,15 @@
 {
   "users": [
     {
-      "username": "testuser1",
-      "password": "$2y$10$XQBkgqYr7eoM1oZieGKOJeBgTulWWweK9Hnz7p0AZHyZ7FgrFG0Ty",
+      "username": "testuser1@uwo.ca",
+      "password": "$2b$10$nfhl4hgfQDRmCv74sYvT4ORSOirIFZLSC9pnxTGH8cULM7/TwuJAe",
       "status": "active",
       "level": "admin",
       "email": "testuser1@uwo.ca",
       "verifylink": ""
     },
     {
-      "username": "testuser2",
+      "username": "testuser2@uwo.ca",
       "password": "$2b$10$nfhl4hgfQDRmCv74sYvT4ORSOirIFZLSC9pnxTGH8cULM7/TwuJAe",
       "status": "pending",
       "level": "user",
@@ -17,12 +17,82 @@
       "verifylink": ""
     },
     {
-      "username": "testuser3",
+      "username": "testuser3@uwo.ca",
       "password": "$2b$10$aY/pdYANA11qaDlQkHT4ZeHUFf.3RtNGtTgWVdDBVkat7SoxRwuS.",
       "status": "pending",
       "level": "user",
       "email": "testuser3@uwo.ca",
       "verifylink": ""
+    },
+    {
+      "username": "testuser5@uwo.ca",
+      "password": "$2b$10$DnhSH5v0lHCL/f0LZC3W8.8jnvbqH5.5vD7yi1daRX7Hhmz8PSGQy",
+      "status": "active",
+      "level": "user",
+      "verifylink": "emailverify/testuser5@uwo.ca"
+    },
+    {
+      "username": "testuser4@uwo.ca",
+      "password": "$2b$10$2kTEWMPYYkregc/wR3nBXeYKvzej/P.939KLsKzj529d78WEtizGa",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser4@uwo.ca"
+    },
+    {
+      "username": "testuser6@uwo.ca",
+      "password": "$2b$10$hnBAIckqqhUDSa96X8PKqe6sSZJWFlpGJz3fdSeoFjCUMMqYY0PTG",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser6@uwo.ca"
+    },
+    {
+      "username": "testuser7@uwo.ca",
+      "password": "$2b$10$9zdcZsn.kJYMTbvLKJG2quVOEAxY.2PfLd1.k.2Q/jkiL5KDXsxxu",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser7@uwo.ca"
+    },
+    {
+      "username": "testuser8@uwo.ca",
+      "password": "$2b$10$0rwiQ2udSwN5zmZyOXMzP.92zdv0pA8XpLZP6myxJ/XArqwKx6O7i",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser8@uwo.ca"
+    },
+    {
+      "username": "testuser9@uwo.ca",
+      "password": "$2b$10$ZqU8YO04XATV/NXMD6qJwuil1Dfsz8fhefggfmn7zH5dOZzfWv20O",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser9@uwo.ca"
+    },
+    {
+      "username": "testuser10@uwo.ca",
+      "password": "$2b$10$bTQ9ia0vPWQd0LnH0kMo/.m8kkAw9Z0u.WhFajpDZme9bBkADFwQO",
+      "status": "pending",
+      "level": "user",
+      "verifylink": "emailverify/testuser10@uwo.ca"
+    },
+    {
+      "username": "testuser1@gmail.com",
+      "password": "$2b$10$jc.req3U84f/xwRss/PAJusJsGVZk8eTH3wgftbCdQRa3gXf.Ji/S",
+      "status": "active",
+      "level": "user",
+      "verifylink": "emailverify/testuser1@gmail.com"
+    },
+    {
+      "username": "testuser2@gmail.com",
+      "password": "$2b$10$EzqnuodIuOTLrtwb3aLsLuld9kPur8o5.czn9StZLgAb/XPkkfQOO",
+      "status": "active",
+      "level": "user",
+      "verifylink": "emailverify/testuser2@gmail.com"
+    },
+    {
+      "username": "testuser3@gmail.com",
+      "password": "$2b$10$Dnf/4yaGlTxWlFXTfItwwOUFO.n/nTtgcGSza4XBY4L4.4xj4Lpkm",
+      "status": "active",
+      "level": "user",
+      "verifylink": "emailverify/testuser3@gmail.com"
     }
   ]
 }
