@@ -5,7 +5,24 @@
       "password": "$2y$10$XQBkgqYr7eoM1oZieGKOJeBgTulWWweK9Hnz7p0AZHyZ7FgrFG0Ty",
       "status": "active",
       "level": "admin",
-      "email": "testuser1@uwo.ca"
+      "email": "testuser1@uwo.ca",
+      "verifylink": ""
+    },
+    {
+      "username": "testuser2",
+      "password": "$2b$10$nfhl4hgfQDRmCv74sYvT4ORSOirIFZLSC9pnxTGH8cULM7/TwuJAe",
+      "status": "pending",
+      "level": "user",
+      "email": "testuser2@uwo.ca",
+      "verifylink": ""
+    },
+    {
+      "username": "testuser3",
+      "password": "$2b$10$aY/pdYANA11qaDlQkHT4ZeHUFf.3RtNGtTgWVdDBVkat7SoxRwuS.",
+      "status": "pending",
+      "level": "user",
+      "email": "testuser3@uwo.ca",
+      "verifylink": ""
     }
   ]
 }

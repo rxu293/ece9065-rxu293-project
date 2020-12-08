@@ -13,6 +13,8 @@ let allowCrossDomain = function(req, res, next) {
 } 
 app.use(allowCrossDomain);
 app.use(express.json({ limit: 20000 }));
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 //setup the database
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -37,8 +39,34 @@ router.use((req, res, next) =>{
 })
 router.use(express.json());
 
-
-//login verify
+//signup
+router.post('/signup', (req, res) =>{
+	let username = req.body.username;
+	let password = req.body.password;
+	let email = req.body.email;
+	let existFlag = user_db.get("users").find({username:username}).value();
+	if (existFlag)
+	{
+		let msg = {msg: 'this username is already existing'};
+		res.send(msg);
+	}
+	else{
+		const hashedpassword = bcrypt.hashSync(password, saltRounds);
+		let data =
+			{
+				"username": username,		
+  	  			"password": hashedpassword,
+  	  			"status": "pending",
+  	  			"level": "user",
+  	  			"email": email,
+  	  			"verifylink":""
+			}
+		user_db.get("users").push(data).write();
+		let msg = {msg:"signup successfully, please verify your email"};
+		res.send("msg");
+	}	
+});
+//login
 router.post('/login', (req, res) =>{
 	const username = req.body.username;
 	const user = {name: username};
