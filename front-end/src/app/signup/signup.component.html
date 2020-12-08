@@ -1,0 +1,9 @@
+<h4><label for="search-box">Login</label></h4>
+<label for="search-box">email:</label>
+<input id="search-box-subject" [(ngModel)] = "username"/>
+<label for="search-box">password:</label>
+<input id="search-box-catalog_nbr" [(ngModel)] = "password"/>
+<button (click) ="signup()">signup</button>
+<div *ngIf = "verifylink"><a routerLink = "/login">click here to verify your email: {{verifylink}}</a></div>
+<div *ngIf = "errmsg"><p>{{errmsg}}</div>
+

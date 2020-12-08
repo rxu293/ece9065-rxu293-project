@@ -1,0 +1,15 @@
+<div *ngIf = "!user">
+<h4><label for="search-box">Login</label></h4>
+<label for="search-box">username:</label>
+<input id="search-box-subject" [(ngModel)] = "username" />
+<label for="search-box">password:</label>
+<input id="search-box-catalog_nbr" [(ngModel)] = "password"/>
+<button (click) ="login()">login</button>
+<button (click) ="signInWithGoogle()">login with Google</button>
+<div *ngIf = "errmsg"><p>{{errmsg}}</div>
+</div>
+
+<div *ngIf = "user">
+	<h4> Welcome, {{user}}</h4>
+	<button (click)="logout()">logout</button>
+</div>

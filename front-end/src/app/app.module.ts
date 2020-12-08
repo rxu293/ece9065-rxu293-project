@@ -13,6 +13,11 @@ import { MessagesComponent } from './messages/messages.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -32,8 +37,26 @@ import { LoginUserComponent } from './login-user/login-user.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SocialLoginModule,
   ],
-  providers: [],
+  providers: [{
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '705792113731-fm43s9u6m59gqa4fcef4vu0m0lfkfs0g.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
