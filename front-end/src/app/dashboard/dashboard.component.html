@@ -12,7 +12,7 @@
         <td>{{schedule[0].creator}}</td>
         <td>{{schedule[0].len}}</td>
         <td *ngIf = "selectedSchedule">{{schedule[0].description}}</td>
-        <button (click) = "onSelect(schedule)">show more info</button>
+        <button *ngIf = "!selectedSchedule" (click) = "onSelect(schedule)">show more info</button>
       </tr>
  </table>
  <div *ngIf = "selectedSchedule">

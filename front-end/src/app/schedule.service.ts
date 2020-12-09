@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Course } from './course';
 import { Schedule } from './Schedule';
+import { Loginres } from './Loginres';
 import { MessageService } from './message.service';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +14,7 @@ import { MessageService } from './message.service';
 export class ScheduleService {
 
   private publicScheduleUrl = 'http://localhost:3000/api/open/schedules';  // URL to web api
-  private keywordUrl = 'http://localhost:3000/api/open/search';
+  private addScheduleUrl = 'http://localhost:3000/api/secure/schedule';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -26,7 +27,7 @@ export class ScheduleService {
 
   /** GET coursees from the server */
   getPublicSchedules(): Observable<Schedule[]> {
-    const headers = { 'Content-Type': 'application/json' };
+    let headers = { 'Content-Type': 'application/json' };
     return this.http.get<Schedule[]>(this.publicScheduleUrl)
       .pipe(
         tap(_ => this.log('fetched coursees')),
@@ -34,12 +35,24 @@ export class ScheduleService {
       );
   }
 
-   getcoursebykeyword(keyword: string): Observable<Course[]> {
-    const headers = { 'Content-Type': 'application/json' };
-    return this.http.get<Course[]>(this.keywordUrl+"/"+keyword)
+   addSchedule(jwt: string, schedulename: string, description: string, visibility: string): Observable<Loginres> {
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+    let body = {schedule_name:schedulename, description:description, visibility:visibility};
+    return this.http.post<Loginres>(this.addScheduleUrl, body, {headers})
       .pipe(
-        tap(_ => this.log('fetched coursees')),
-        catchError(this.handleError<Course[]>('getcoursees', []))
+        tap(),
+        catchError(this.handleError<Loginres>('add schedule fail'))
+      );
+  }
+
+   showMySchedules(jwt: string, user: string): Observable<Schedule[]> {
+     let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+    return this.http.get<Schedule[]>(this.addScheduleUrl + '/' + user, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Schedule[]>('getMySchedules', []))
       );
   }
 

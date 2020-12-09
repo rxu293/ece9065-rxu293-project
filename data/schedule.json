@@ -1,36 +1,48 @@
 {
+  "20201209": [
+    {
+      "name": "20201209",
+      "creator": "testuser5@uwo.ca",
+      "modified_time": 1607516349131,
+      "description": "1209schedule",
+      "visibility": "public",
+      "len": 0
+    }
+  ],
   "sche1": [
     {
       "name": "sche1",
-      "creator": "testuser1",
+      "creator": "Jim",
       "modified_time": 1607070020411,
       "description": "testuser1's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 2
     },
     {
       "subject": "KOREAN",
-      "catalog_nbr": "3214",
+      "catalog_nbr": "3214E",
       "start_time": "9:00",
       "end_time": "12:00",
-      "term": "E",
-      "year": 1
+      "term": "",
+      "year": ""
     },
     {
       "subject": "JAPANESE",
       "catalog_nbr": "3114",
       "start_time": "7:00",
       "end_time": "11:00",
-      "term": "F",
-      "year": 2
+      "term": "",
+      "year": 1
     }
   ],
   "sche2": [
     {
       "name": "sche2",
       "creator": "testuser2",
-      "modified_time": 1606984158913,
+      "modified_time": 1607070020431,
       "description": "testuser2's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -47,7 +59,8 @@
       "creator": "testuser3",
       "modified_time": 1606984158924,
       "description": "testuser3's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -64,7 +77,8 @@
       "creator": "testuser5",
       "modified_time": 1606984158910,
       "description": "testuser5's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -81,7 +95,8 @@
       "creator": "testuser6",
       "modified_time": 1606984158914,
       "description": "testuser6's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -98,7 +113,8 @@
       "creator": "testuser7",
       "modified_time": 1606984158914,
       "description": "testuser7's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -115,7 +131,8 @@
       "creator": "testuser8",
       "modified_time": 1606984158914,
       "description": "testuser8's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -132,7 +149,8 @@
       "creator": "testuser1",
       "modified_time": 1606984158114,
       "description": "testuser9's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -149,7 +167,8 @@
       "creator": "testuser10",
       "modified_time": 1606984158014,
       "description": "testuser10's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -166,7 +185,8 @@
       "creator": "testuser11",
       "modified_time": 1606984158094,
       "description": "testuser11's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -183,7 +203,8 @@
       "creator": "testuser12",
       "modified_time": 1606984159014,
       "description": "testuser12's schedule",
-      "visibility": "public"
+      "visibility": "public",
+      "len": 1
     },
     {
       "subject": "KOREAN",
@@ -200,7 +221,89 @@
       "creator": "testuser",
       "modified_time": 1607048284582,
       "description": "this is just a test",
+      "visibility": "public",
+      "len": 0
+    }
+  ],
+  "sche13": [
+    {
+      "name": "sche13",
+      "creator": "testuser13@uwo.ca",
+      "modified_time": 1607048284599,
+      "description": "testuser13's schedule",
+      "visibility": "public",
+      "len": 1
+    },
+    {
+      "subject": "KOREAN",
+      "catalog_nbr": "3214",
+      "start_time": "9:00",
+      "end_time": "11:00",
+      "term": "E",
+      "year": 1
+    }
+  ],
+  "test14": [
+    {
+      "name": "test14",
+      "creator": "testuser14@uwo.ca",
+      "modified_time": 1607048284699,
+      "description": "this is just a test",
+      "visibility": "public",
+      "len": 0
+    }
+  ],
+  "frontendfirst": [
+    {
+      "name": "frontendfirst",
+      "creator": "testuser5@uwo.ca",
+      "modified_time": 1607516104664,
+      "description": "first",
       "visibility": "public"
+    }
+  ],
+  "suuud": [
+    {
+      "name": "suuud",
+      "creator": "testuser5@uwo.ca",
+      "modified_time": 1607516610675,
+      "description": "asd13test",
+      "visibility": "private",
+      "len": 0
+    }
+  ],
+  "junkrat": [
+    {
+      "name": "junkrat",
+      "creator": "testuser5@uwo.ca",
+      "modified_time": 1607516696664,
+      "description": "overwatchjunkrate",
+      "visibility": "private",
+      "len": 0
+    },
+    {
+      "subject": "KOREAN",
+      "catalog_nbr": "3214",
+      "start_time": "9:00",
+      "end_time": "12:00",
+      "term": "E",
+      "year": 2
+    },
+    {
+      "subject": "JAPANESE",
+      "catalog_nbr": "3114",
+      "start_time": "7:00",
+      "end_time": "11:00",
+      "term": "F",
+      "year": 1
+    },
+    {
+      "subject": "CHINESE",
+      "catalog_nbr": "3194",
+      "start_time": "9:00 AM",
+      "end_time": "11:00 AM",
+      "term": "A",
+      "year": 1
     }
   ]
 }

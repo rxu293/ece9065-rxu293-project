@@ -27,6 +27,7 @@ const db = low(adapter);
 const sche_db = low(schedule_adapter);
 const user_db = low(user_adapter);
 const rv_db = low(review_adapter);
+var user$ = "";
 
 //server files in static folder at root URL '/'
 app.use('/', express.static('static'));
@@ -178,8 +179,13 @@ router.get('/open/schedules', (req, res) =>{
 	{
 		let sche = sche_db.get(keys[i]).value();
 		if (sche[0].visibility == "public")
-		sche[0].len = sche.length - 1;
-		ret.push(sche);
+		{
+			sche[0].len = sche.length - 1;
+			if (sche[0].len > 0)
+			{
+				ret.push(sche);
+			}
+		}
 	}
 	ret.sort(function(a,b){
 		if (a[0].modified_time < b[0].modified_time)
@@ -195,29 +201,83 @@ router.get('/open/schedules', (req, res) =>{
 
 //authenticated user
 //4.a create schedules
-router.post('/secure/schedule', (req, res) =>{
+router.post('/secure/schedule', authenticateToken, (req, res) =>{
 	let schedulename = req.body.schedule_name;
 	let existFlag = sche_db.get(schedulename).value();
 	if (existFlag)
 	{
 		let msg = {msg : 'the given schedule name can not be created, because there is already a same schedule name existing' }
-		res.status(400)
-		.send(msg);
+		res.send(msg);
 	} 
 	else
 	{
 		let data =
 		{
 			"name": schedulename,		
-  	  		"creator": user,
+  	  		"creator": user$,
   	  		"modified_time": Date.now(),
   	  		"description": req.body.description,
-  	  		"visibility": req.body.visibility
+  	  		"visibility": req.body.visibility,
+  	  		"len": 0
 		}
 		sche_db.set(schedulename, [data]).write();
 		let msg = {msg: 'added successfully'}
 		res.send(msg);
 	}
+});
+
+//get all schedules a user created
+router.get('/secure/schedule/:creator', authenticateToken, (req, res) =>{
+	let creator = req.params.creator;
+	if (creator != user$)
+	{
+		let msg = {msg: "JWT and user does not match"};
+		res.send(msg);
+	}
+	let data = sche_db.value();
+	let keys = Object.keys(data);
+	let ret = [];
+	for (i = 0; i < keys.length; ++i)
+	{
+		let sche = sche_db.get(keys[i]).value();
+		if (sche[0].creator == creator)
+		{
+			sche[0].len = sche.length - 1;
+			let st = new Date(sche[0].modified_time).toISOString();
+			sche[0].modified_time = st;
+			ret.push(sche);
+		}
+	}
+	for (i = 0; i < ret.length; ++i)
+	{
+		ret[i].sort(function(a,b){
+		if (a.year == null)
+			return -1;
+		if (b.year == null)
+			return 1;
+		if (a.year < b.year)
+			return -1;
+		if (b.year > a.year)
+			return 1;
+		if (a.term == null)
+			return -1;
+		if (b.term == null)
+			return -1;
+		if (a.term < b.term)
+			return -1;
+		if (b.term > a.term)
+			return 1;
+		if (a.subject < b.subject)
+			return -1;
+		if (a.subject > b.subject)
+			return 1;
+		if (a.catalog_nbr < b.catalog_nbr)
+			return -1;
+		if (a.catalog_nbr > b.catalog_nbr)
+			return 1;
+	})
+	}
+	res.send(ret);
 });
 
 //4.f edit a schedule
@@ -322,7 +382,8 @@ function authenticateToken(req, res, next){
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
 		if (err) return res.sendStatus(403);
 		req.user = user;
-		console.log(user);
+		user$ = user.name;
+		console.log(user$);
 		next(); 
 	})
 }
