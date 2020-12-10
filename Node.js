@@ -302,7 +302,7 @@ router.post('/secure/schedule/:schedulename', (req, res) =>{
 });
 
 //4.g delete a schedule
-router.delete('/secure/schedule/:schedulename', (req, res) =>{
+router.delete('/secure/schedule/:schedulename', authenticateToken, (req, res) =>{
 	let schedulename = req.params.schedulename;
 	let existFlag = sche_db.get(schedulename).value();
 	if (!existFlag)
@@ -313,16 +313,17 @@ router.delete('/secure/schedule/:schedulename', (req, res) =>{
 	} 
 	else
 	{
-		if (sche_db.get(schedulename).filter({creator:user}).value())
+		if (sche_db.get(schedulename).value()[0].creator == user$)
 		{
 			sche_db.unset(schedulename).write();
 			let msg = {msg: "successfully delete schedule '" + schedulename + "'"};
+			res.send(msg);
 		}
 		else
 		{
 			let msg = {msg:"you are trying to delete someone else's schedule"};
+			res.send(msg);
 		}
-		res.send(msg);
 	}
 });
 

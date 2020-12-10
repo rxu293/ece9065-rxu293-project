@@ -27,28 +27,6 @@
       <button (click) = "addNewSchedule()">submit</button>
  	</table>
 
- 	<table *ngIf = "scheduleediting" class="schedule-editing">
- 		<tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Visibility</th>
-      	</tr>
-      <tr>
-      	 <td></td>
-      	 <td></td>
-      	 <td><input [(ngModel)] = "schedule_visibility"></td>
-      </tr>
-      <tr>
-      	  <th>Subject</th>
-          <th>Catalog_nbr</th>
-          <th>Start_time</th>
-          <th>End_time</th>
-          <th>Term</th>
-          <th>Year</th>
-          <td><button (click) = "addNewLine()">Add a new course</button></td>
-      </tr>
- 	</table>
-
  	<table *ngIf = "schedules$">
  		<tr>
           <th>Name</th>
@@ -62,6 +40,7 @@
       	  <td>{{s[0].visibility}}</td>
       	  <td>{{s[0].modified_time}}</td>
       	  <button *ngIf = "!selectedSchedule" (click) = "onSelectSchedule(s)">Edit this schedule</button>
+      	  <button (click) = "deleteSchedule(s)">Delete this schedule</button>
       	</tr>
  	</table>
 
@@ -76,14 +55,16 @@
           <th>Year</th>
      </tr>
      <tr *ngFor="let c of selectedSchedule| slice: 1" >
-        <td>{{c.subject}}</td>
-        <td>{{c.catalog_nbr}}</td>
-        <td>{{c.start_time}}</td>
-        <td>{{c.end_time}}</td>
-        <td>{{c.term}}</td>
-        <td>{{c.year}}</td>   
+        <td><input [(ngModel)] = "c.subject"></td>
+        <td><input [(ngModel)] = "c.catalog_nbr"></td>
+        <td><input [(ngModel)] = "c.start_time"></td>
+        <td><input [(ngModel)] = "c.end_time"></td>
+        <td><input [(ngModel)] = "c.term"></td>
+        <td><input [(ngModel)] = "c.year"></td>
+        <button (click) = "deleteCourse(c)">Delete this course</button>   
      </tr>
-    <button (click) = "offSelectSchedule(s)">Undo editing</button>
+     <button (click) = "addNewLine(selectedSchedule)">Add a new course</button>
+    <button (click) = "offSelectSchedule(s)">Cancel editing</button>
     <button>Confirm editing</button>
    </table> 
  </div>

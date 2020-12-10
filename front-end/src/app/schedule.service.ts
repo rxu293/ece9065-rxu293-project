@@ -56,6 +56,16 @@ export class ScheduleService {
       );
   }
 
+    deleteSchedule(jwt: string, schedule_name: string):  Observable<Loginres>{
+      let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+    return this.http.delete<Loginres>(this.addScheduleUrl + '/' + schedule_name, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('getMySchedules'))
+      );
+    }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

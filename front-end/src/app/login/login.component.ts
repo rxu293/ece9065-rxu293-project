@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
   schedule_visibility: string;
   schedule_description: string;
   schedules$ : Observable<Schedule[]>;
-  selectedSchedule: Schedule;
+  selectedSchedule: Schedule[];
+  private newSchedule: Schedule;
   constructor(
   private userService : UserService, private authService: SocialAuthService, private scheduleService: ScheduleService) { }
 
@@ -77,7 +78,7 @@ export class LoginComponent implements OnInit {
     this.schedules$ = this.scheduleService.showMySchedules(this.jwt, this.user);
   }
 
-  onSelectSchedule(s : Schedule){
+  onSelectSchedule(s : Schedule[]){
     this.selectedSchedule = s;
   }
 
@@ -108,7 +109,19 @@ export class LoginComponent implements OnInit {
   }  
 
   addNewLine(): void{
-
+    this.selectedSchedule.push(this.newSchedule);  
   }
 
+  deleteCourse(c : Schedule): void{
+    this.selectedSchedule = this.selectedSchedule.filter(s => s !== c);
+  }
+
+  deleteSchedule(s : Schedule): void{
+    if (confirm("Are you sure to delete schedule "+ s[0].name)) {
+      this.scheduleService.deleteSchedule(this.jwt, s[0].name).subscribe(ret => {
+        this.errmsg = ret.msg;
+      this.onSelectShow();
+     })
+    }
+  }
 }

@@ -3,7 +3,7 @@
     {
       "name": "20201209",
       "creator": "testuser5@uwo.ca",
-      "modified_time": 1607516349131,
+      "modified_time": "2020-12-09T12:19:09.131Z",
       "description": "1209schedule",
       "visibility": "public",
       "len": 0
@@ -253,41 +253,22 @@
       "len": 0
     }
   ],
-  "frontendfirst": [
-    {
-      "name": "frontendfirst",
-      "creator": "testuser5@uwo.ca",
-      "modified_time": 1607516104664,
-      "description": "first",
-      "visibility": "public"
-    }
-  ],
-  "suuud": [
-    {
-      "name": "suuud",
-      "creator": "testuser5@uwo.ca",
-      "modified_time": 1607516610675,
-      "description": "asd13test",
-      "visibility": "private",
-      "len": 0
-    }
-  ],
   "junkrat": [
     {
       "name": "junkrat",
       "creator": "testuser5@uwo.ca",
-      "modified_time": 1607516696664,
+      "modified_time": "2020-12-09T12:24:56.664Z",
       "description": "overwatchjunkrate",
-      "visibility": "private",
-      "len": 0
+      "visibility": "public",
+      "len": 3
     },
     {
-      "subject": "KOREAN",
-      "catalog_nbr": "3214",
-      "start_time": "9:00",
-      "end_time": "12:00",
-      "term": "E",
-      "year": 2
+      "subject": "CHINESE",
+      "catalog_nbr": "3194",
+      "start_time": "9:00 AM",
+      "end_time": "11:00 AM",
+      "term": "A",
+      "year": 1
     },
     {
       "subject": "JAPANESE",
@@ -298,12 +279,12 @@
       "year": 1
     },
     {
-      "subject": "CHINESE",
-      "catalog_nbr": "3194",
-      "start_time": "9:00 AM",
-      "end_time": "11:00 AM",
-      "term": "A",
-      "year": 1
+      "subject": "KOREAN",
+      "catalog_nbr": "3214",
+      "start_time": "9:00",
+      "end_time": "12:00",
+      "term": "E",
+      "year": 2
     }
   ]
 }
