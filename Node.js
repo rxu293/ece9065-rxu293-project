@@ -281,10 +281,11 @@ router.get('/secure/schedule/:creator', authenticateToken, (req, res) =>{
 });
 
 //4.f edit a schedule
-router.post('/secure/schedule/:schedulename', (req, res) =>{
+router.post('/secure/schedule/:schedulename', authenticateToken, (req, res) =>{
 	let schedulename = req.params.schedulename;
 	let pairs = req.body.pairs
 	let header = pairs[0];
+	console.log(pairs);
 	header.modified_time = Date.now();
 	sche_db.set(schedulename,[header]).write();
 	if (pairs.length > 1)

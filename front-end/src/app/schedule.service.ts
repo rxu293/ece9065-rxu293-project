@@ -56,13 +56,24 @@ export class ScheduleService {
       );
   }
 
+  editSchedule(jwt: string, schedule_name: string, data : Schedule[]): Observable<Loginres> {
+     let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+     let body = {pairs: data};
+    return this.http.post<Loginres>(this.addScheduleUrl + '/' +  schedule_name, body, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('editSchedule'))
+      );
+  }
+
     deleteSchedule(jwt: string, schedule_name: string):  Observable<Loginres>{
       let headers = { 'Content-Type': 'application/json',
     'Authorization': `Bearer ${jwt}` };
     return this.http.delete<Loginres>(this.addScheduleUrl + '/' + schedule_name, {headers})
       .pipe(
         tap(),
-        catchError(this.handleError<Loginres>('getMySchedules'))
+        catchError(this.handleError<Loginres>('deleteSchedule'))
       );
     }
 

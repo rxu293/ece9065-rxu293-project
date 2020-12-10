@@ -12,27 +12,19 @@
   "sche1": [
     {
       "name": "sche1",
-      "creator": "Jim",
-      "modified_time": 1607070020411,
+      "creator": "testuser1",
+      "modified_time": 1607620991756,
       "description": "testuser1's schedule",
       "visibility": "public",
-      "len": 2
+      "len": 1
     },
     {
       "subject": "KOREAN",
-      "catalog_nbr": "3214E",
+      "catalog_nbr": "3214",
       "start_time": "9:00",
-      "end_time": "12:00",
-      "term": "",
-      "year": ""
-    },
-    {
-      "subject": "JAPANESE",
-      "catalog_nbr": "3114",
-      "start_time": "7:00",
       "end_time": "11:00",
-      "term": "",
-      "year": 1
+      "term": "E",
+      "year": 2
     }
   ],
   "sche2": [
@@ -257,10 +249,18 @@
     {
       "name": "junkrat",
       "creator": "testuser5@uwo.ca",
-      "modified_time": "2020-12-09T12:24:56.664Z",
-      "description": "overwatchjunkrate",
+      "modified_time": 1607626216976,
+      "description": "overwatchjunkrate1",
       "visibility": "public",
-      "len": 3
+      "len": 4
+    },
+    {
+      "subject": "ACTURSCI",
+      "catalog_nbr": "2053",
+      "start_time": "9:00 AM",
+      "end_time": "11:00 AM",
+      "term": "",
+      "year": "2"
     },
     {
       "subject": "CHINESE",
@@ -268,14 +268,6 @@
       "start_time": "9:00 AM",
       "end_time": "11:00 AM",
       "term": "A",
-      "year": 1
-    },
-    {
-      "subject": "JAPANESE",
-      "catalog_nbr": "3114",
-      "start_time": "7:00",
-      "end_time": "11:00",
-      "term": "F",
       "year": 1
     },
     {

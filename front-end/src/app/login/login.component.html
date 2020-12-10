@@ -63,9 +63,13 @@
         <td><input [(ngModel)] = "c.year"></td>
         <button (click) = "deleteCourse(c)">Delete this course</button>   
      </tr>
+     <Label>Description</Label>
+     <input [(ngModel)] = "selectedSchedule[0].description">
+     <label>Visibilty</label>
+     <input [(ngModel)] = "selectedSchedule[0].visibility">
      <button (click) = "addNewLine(selectedSchedule)">Add a new course</button>
     <button (click) = "offSelectSchedule(s)">Cancel editing</button>
-    <button>Confirm editing</button>
+    <button (click) = "confirmEdit()">Confirm editing</button>
    </table> 
  </div>
 </div>

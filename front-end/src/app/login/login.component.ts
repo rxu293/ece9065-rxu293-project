@@ -26,9 +26,25 @@ export class LoginComponent implements OnInit {
   schedule_name: string;
   schedule_visibility: string;
   schedule_description: string;
+  editSummary: string;
+  editDetails: string;
   schedules$ : Observable<Schedule[]>;
   selectedSchedule: Schedule[];
-  private newSchedule: Schedule;
+  oldselectedSchedule: Schedule[];
+  private newSchedule: Schedule = {
+    name : "",
+    creator: "",
+    modified_time: "",
+    description: "",
+    subject: "",
+    catalog_nbr: "",
+    start_time: "",
+    end_time: "",
+    term: "",
+    year: 0,
+    visibility: "",
+    len: 0
+  };
   constructor(
   private userService : UserService, private authService: SocialAuthService, private scheduleService: ScheduleService) { }
 
@@ -70,6 +86,8 @@ export class LoginComponent implements OnInit {
 
   onSelectAdd(): void{
     this.scheduleadding = true;
+    this.scheduleshowing = false;
+    this.schedules$ = null;
   }
 
   onSelectShow() : void{
@@ -80,6 +98,7 @@ export class LoginComponent implements OnInit {
 
   onSelectSchedule(s : Schedule[]){
     this.selectedSchedule = s;
+    this.oldselectedSchedule = Object.assign([], s); //shallow copy
   }
 
   offSelectSchedule(){
@@ -89,7 +108,7 @@ export class LoginComponent implements OnInit {
   addNewSchedule(): void{
     if (!this.schedule_name)
     {
-      this.errmsg = "Schedule name cannot be null ";
+      this.errmsg = "Schedule name cannot be empty ";
       return;
     }
 
@@ -109,9 +128,58 @@ export class LoginComponent implements OnInit {
   }  
 
   addNewLine(): void{
-    this.selectedSchedule.push(this.newSchedule);  
+    this.selectedSchedule.push(Object.assign({}, this.newSchedule));  
   }
 
+  confirmEdit(): void{
+   for (let c of this.selectedSchedule.slice(1))
+   {
+       if (!c.subject)
+        {
+         alert("subject name cannot be empty");
+         return;
+        }
+       if (!c.catalog_nbr)
+        {
+         alert("catalog number cannot be empty");
+         return; 
+        }
+       if (!c.start_time)
+        {
+         alert("start time cannot be empty");
+         return; 
+        }
+       if (!c.end_time)
+        {
+         alert("end time cannot be empty");
+         return;
+        }  
+   } 
+   this.editSummary = "Edit Summary: The old schedule has " + 
+   (this.oldselectedSchedule.length -1).toString() + 
+   " courses, while the new schedule has " + (this.selectedSchedule.length - 1).toString()+ " courses.";
+   this.editDetails = "Here are the courses names that old schedule has ";
+   for (let c of this.oldselectedSchedule) 
+   {
+     if (c.subject === undefined)
+       continue;
+     this.editDetails += c.subject + ", ";
+   }
+   this.editDetails += "Here are the courses names that new schedule will have ";
+   for (let c of this.selectedSchedule) 
+   {
+     if (c.subject === undefined)
+       continue;
+     this.editDetails += c.subject + ", ";
+   }
+   if(confirm(this.editSummary + "  " + this.editDetails + "  Confirm the changes?")){
+     this.scheduleService.editSchedule(this.jwt, this.selectedSchedule[0].name, this.selectedSchedule).
+     subscribe(ret => alert(ret.msg));
+     this.offSelectSchedule();
+     this.onSelectShow();
+   }
+  }
+  
   deleteCourse(c : Schedule): void{
     this.selectedSchedule = this.selectedSchedule.filter(s => s !== c);
   }
