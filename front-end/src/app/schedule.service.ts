@@ -8,6 +8,7 @@ import { Course } from './course';
 import { Schedule } from './Schedule';
 import { Loginres } from './Loginres';
 import { MessageService } from './message.service';
+import { user } from './user';
 
 @Injectable({ providedIn: 'root' })
 

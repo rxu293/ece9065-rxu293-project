@@ -12,7 +12,7 @@
       "username": "testuser2@uwo.ca",
       "password": "$2b$10$nfhl4hgfQDRmCv74sYvT4ORSOirIFZLSC9pnxTGH8cULM7/TwuJAe",
       "status": "pending",
-      "level": "user",
+      "level": "admin",
       "email": "testuser2@uwo.ca",
       "verifylink": ""
     },
@@ -56,7 +56,7 @@
       "username": "testuser8@uwo.ca",
       "password": "$2b$10$0rwiQ2udSwN5zmZyOXMzP.92zdv0pA8XpLZP6myxJ/XArqwKx6O7i",
       "status": "pending",
-      "level": "user",
+      "level": "admin",
       "verifylink": "emailverify/testuser8@uwo.ca"
     },
     {

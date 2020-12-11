@@ -6,6 +6,7 @@ import { SocialAuthService } from "angularx-social-login";
 import { ScheduleService } from '../schedule.service';
 import { reviewService } from '../review.service';
 import { Schedule } from '../Schedule';
+import { user } from '../user';
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 
@@ -25,17 +26,20 @@ export class LoginComponent implements OnInit {
   scheduleadding: boolean;
   scheduleshowing: boolean;
   reviewadding: boolean;
+  usershowing: boolean;
   schedule_name: string;
   schedule_visibility: string;
   schedule_description: string;
   editSummary: string;
   editDetails: string;
   schedules$ : Observable<Schedule[]>;
+  users$: Observable<user[]>;
   selectedSchedule: Schedule[];
   oldselectedSchedule: Schedule[];
   reviewSubject: string;
   reviewCatalog: string;
   reviewContent: string;
+
   private newSchedule: Schedule = {
     name : "",
     creator: "",
@@ -95,6 +99,7 @@ export class LoginComponent implements OnInit {
     this.scheduleshowing = false;
     this.schedules$ = null;
     this.reviewadding = false;
+    this.usershowing = false;
   }
 
   onSelectShow() : void{
@@ -102,6 +107,7 @@ export class LoginComponent implements OnInit {
     this.scheduleshowing = true;
     this.schedules$ = this.scheduleService.showMySchedules(this.jwt, this.user);
     this.reviewadding = false;
+    this.usershowing = false;
   }
 
   onSelectSchedule(s : Schedule[]){
@@ -213,5 +219,40 @@ export class LoginComponent implements OnInit {
     this.scheduleshowing = false;
     this.selectedSchedule = null;
     this.schedules$ = null;
+    this.usershowing = false;
+  }
+
+  checkUsers(): void{
+    this.reviewadding = false;
+    this.scheduleadding = false;
+    this.scheduleshowing = false;
+    this.selectedSchedule = null;
+    this.schedules$ = null;
+    this.users$ = this.userService.getUsers(this.jwt);
+    this.usershowing = true;
+  }
+
+  grantAdmin(u : user): void{
+    this.userService.grantUser(this.jwt, u.username).
+    subscribe(ret => {
+      alert(ret.msg);
+      this.checkUsers();
+    })
+  }
+
+  activateUser(u : user): void{
+    this.userService.changeUserStatus(this.jwt, u.username, "active").
+    subscribe(ret => {
+      alert(ret.msg);
+      this.checkUsers();
+    })
+  }
+
+  deactivateUser(u : user): void{
+    this.userService.changeUserStatus(this.jwt, u.username, "inactive").
+    subscribe(ret => {
+      alert(ret.msg);
+      this.checkUsers();
+    })
   }
 }

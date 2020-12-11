@@ -6,6 +6,7 @@
 <input id="search-box-catalog_nbr" [(ngModel)] = "password"/>
 <button (click) ="login()">login</button>
 <button (click) ="signInWithGoogle()">login with Google</button>
+<div class = "messagearea" *ngIf = "errmsg"><p>{{errmsg}}</div>
 </div>
 
 <div *ngIf = "user">
@@ -13,6 +14,10 @@
 	<button (click) = "onSelectAdd()">Add a new schedule</button>
 	<button (click) = "onSelectShow()">Show all my schedules</button>
   <button (click) = "onSelectReview()">Add a review</button>
+  <div *ngIf = "level == 'admin'">
+    <button (click) = "checkUsers()">Check all the users</button>
+    <button (click) = "checkReviews()">Check all the reviews</button> 
+  </div>
 	<table *ngIf = "scheduleadding" class="schedule-adding">
       <tr>
           <th>Name</th>
@@ -82,7 +87,25 @@
   <input [(ngModel)] = "reviewContent">
   <button (click) = "addReview()">Submit review</button>
  </div>
+
+ <div *ngIf = "usershowing">
+  <table>
+      <tr>
+          <th>Email</th>
+          <th>Level</th>
+          <th>Status</th>
+     </tr>
+     <tr *ngFor="let u of users$ | async" >
+        <td>{{u.username}}</td>
+        <td>{{u.level}}</td>
+        <td>{{u.status}}</td>
+        <td><button *ngIf = "u.status == 'inactive'" (click) = "activateUser(u)">Activate this user</button></td>
+        <td><button *ngIf = "u.status == 'active'" (click) = "deactivateUser(u)">Deactivate this user</button></td>
+        <td><button (click) = "grantAdmin(u)">Grant admin privilige</button></td>
+     </tr>
+  </table>
+ </div>
  <button (click)="logout()">logout</button>
 </div>
 
-<div class = "messagearea" *ngIf = "errmsg"><p>{{errmsg}}</div>
+

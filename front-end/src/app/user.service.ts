@@ -8,6 +8,7 @@ import { Course } from './course';
 import { Schedule } from './Schedule';
 import { MessageService } from './message.service';
 import { Loginres } from './Loginres';
+import { user } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class UserService {
 
    private userLoginUrl = 'http://localhost:3000/api/login';  // URL to web api
    private userSignupUrl = 'http://localhost:3000/api/signup';
+   private userGetUrl = 'http://localhost:3000/api/admin/users';
+   private userGrantUrl = 'http://localhost:3000/api/admin/privilige';
+   private userChangeStatusUrl = 'http://localhost:3000/api/admin/userstatus'
    
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -43,6 +47,37 @@ export class UserService {
       .pipe(
         tap(),
         catchError(this.handleError<Loginres>('userSignup'))
+      );
+  }
+
+  getUsers(jwt: string): Observable<user[]>{
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };    
+    return this.http.get<user[]>(this.userGetUrl, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<user[]>('getUsers'))
+      );
+  }
+
+  grantUser(jwt: string, username: string): Observable<Loginres>{
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };    
+    return this.http.post<Loginres>(this.userGrantUrl + '/' + username, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('grantAdmin'))
+      );
+  }
+
+  changeUserStatus(jwt: string, username: string, flag: string): Observable<Loginres>{
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };    
+    let body = {flag: flag};
+    return this.http.post<Loginres>(this.userChangeStatusUrl + '/' + username, body, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('changeUserStatus'))
       );
   }
 

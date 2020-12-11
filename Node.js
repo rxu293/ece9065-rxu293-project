@@ -348,6 +348,12 @@ router.post('/secure/review', authenticateToken, (req, res) =>{
 });
 
 //admin
+//5.b show all users with user level
+router.get('/admin/users', authenticateToken, (req, res) =>{
+	let data = user_db.get("users").filter({level:"user"}).value();
+	res.send(data);
+});
+
 //5.b grant privilige to other user
 router.post('/admin/privilige/:username', (req, res) =>{
 	let username = req.params.username;
