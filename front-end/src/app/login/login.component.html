@@ -12,7 +12,7 @@
 	<h4> Welcome, {{user}}</h4>
 	<button (click) = "onSelectAdd()">Add a new schedule</button>
 	<button (click) = "onSelectShow()">Show all my schedules</button>
-
+  <button (click) = "onSelectReview()">Add a review</button>
 	<table *ngIf = "scheduleadding" class="schedule-adding">
       <tr>
           <th>Name</th>
@@ -72,7 +72,17 @@
     <button (click) = "confirmEdit()">Confirm editing</button>
    </table> 
  </div>
+
+ <div *ngIf = "reviewadding">
+  <label> Subject</label>
+  <input [(ngModel)] = "reviewSubject">
+  <label> Catalog_nbr</label>
+  <input [(ngModel)] = "reviewCatalog">
+  <label> Content</label>
+  <input [(ngModel)] = "reviewContent">
+  <button (click) = "addReview()">Submit review</button>
+ </div>
+ <button (click)="logout()">logout</button>
 </div>
 
 <div class = "messagearea" *ngIf = "errmsg"><p>{{errmsg}}</div>
-<button (click)="logout()">logout</button>

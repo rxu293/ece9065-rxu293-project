@@ -5,7 +5,7 @@
       "subject": "ACTURSCI",
       "creator": "testuser1",
       "visibility": "public",
-      "modified_time": 1607070020411,
+      "modified_time": "2020-12-04T08:20:20.411Z",
       "content": "I love this course"
     },
     {
@@ -13,8 +13,32 @@
       "subject": "ACTURSCI",
       "creator": "testuser2",
       "visibility": "public",
-      "modified_time": 1607075477758,
+      "modified_time": "2020-12-04T09:51:17.758Z",
       "content": "awesome professor"
+    },
+    {
+      "catalog_nbr": 2053,
+      "subject": "ACTURSCI",
+      "creator": "testuser5@uwo.ca",
+      "visibility": "public",
+      "modified_time": "2020-12-11T05:40:04.062Z",
+      "content": "My favorite course"
+    },
+    {
+      "catalog_nbr": 1878,
+      "subject": "CHINESE",
+      "creator": "testuser5@uwo.ca",
+      "visibility": "public",
+      "modified_time": 1607665879358,
+      "content": "Nice professor"
+    },
+    {
+      "catalog_nbr": 2053,
+      "subject": "ACTURSCI",
+      "creator": "testuser5@uwo.ca",
+      "visibility": "public",
+      "modified_time": 1607665982441,
+      "content": "Recommended!"
     }
   ]
 }

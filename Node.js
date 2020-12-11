@@ -329,13 +329,16 @@ router.delete('/secure/schedule/:schedulename', authenticateToken, (req, res) =>
 });
 
 //4.h add a review for a course
-router.post('/secure/review', (req, res) =>{
+router.post('/secure/review', authenticateToken, (req, res) =>{
+	let catacode = req.body.catalog_nbr;
+	if ((catacode) && (catacode[4])) catacode = catacode.slice(0,-1) + catacode[4].toUpperCase();
+	if (Number(catacode)) catacode = Number(catacode);
 	let data =
 		{
-			"catalog_nbr": req.body.catalog_nbr,
+			"catalog_nbr": catacode,
 	  		"subject": req.body.subject,
-	  		"creator": user,
-	  		"visibility": req.body.visibility,
+	  		"creator": user$,
+	  		"visibility": "public",
 	  		"modified_time": Date.now(),
 	  		"content": req.body.content
 		}
@@ -390,16 +393,6 @@ function authenticateToken(req, res, next){
 	})
 }
 
-
-//1. get all courses subject and classnames
-router.get('/courses', (req,res) =>{
-	let subjects = db.get("courses").map("subject").value();
-	let classNames = db.get("courses").map("className").value();
-	let data = subjects.map(function(e, i){
-		return {subject: e, description: classNames[i]};
-	});
-    res.send(data);
-});
 
 app.use('/api',router);
 

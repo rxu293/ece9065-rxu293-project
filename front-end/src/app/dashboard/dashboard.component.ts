@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Course } from '../course';
 import { courseService } from '../course.service';
 import { ScheduleService } from '../schedule.service';

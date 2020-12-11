@@ -4,6 +4,7 @@ import { Loginres } from '../Loginres';
 import { Observable, Subject } from 'rxjs';
 import { SocialAuthService } from "angularx-social-login";
 import { ScheduleService } from '../schedule.service';
+import { reviewService } from '../review.service';
 import { Schedule } from '../Schedule';
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   level: string;
   scheduleadding: boolean;
   scheduleshowing: boolean;
+  reviewadding: boolean;
   schedule_name: string;
   schedule_visibility: string;
   schedule_description: string;
@@ -31,6 +33,9 @@ export class LoginComponent implements OnInit {
   schedules$ : Observable<Schedule[]>;
   selectedSchedule: Schedule[];
   oldselectedSchedule: Schedule[];
+  reviewSubject: string;
+  reviewCatalog: string;
+  reviewContent: string;
   private newSchedule: Schedule = {
     name : "",
     creator: "",
@@ -46,7 +51,8 @@ export class LoginComponent implements OnInit {
     len: 0
   };
   constructor(
-  private userService : UserService, private authService: SocialAuthService, private scheduleService: ScheduleService) { }
+  private userService : UserService, private authService: SocialAuthService, 
+  private scheduleService: ScheduleService, private reviewService: reviewService) { }
 
   ngOnInit(): void {
     this.schedule_visibility = "private";
@@ -88,12 +94,14 @@ export class LoginComponent implements OnInit {
     this.scheduleadding = true;
     this.scheduleshowing = false;
     this.schedules$ = null;
+    this.reviewadding = false;
   }
 
   onSelectShow() : void{
     this.scheduleadding = false;
     this.scheduleshowing = true;
     this.schedules$ = this.scheduleService.showMySchedules(this.jwt, this.user);
+    this.reviewadding = false;
   }
 
   onSelectSchedule(s : Schedule[]){
@@ -191,5 +199,19 @@ export class LoginComponent implements OnInit {
       this.onSelectShow();
      })
     }
+  }
+
+  addReview() : void{
+    this.reviewService.addReview(this.jwt, this.reviewSubject, this.reviewCatalog, this.reviewContent)
+    .subscribe(ret => alert(ret.msg));
+    this.reviewadding = false;
+  }
+
+  onSelectReview(): void{
+    this.reviewadding = true;
+    this.scheduleadding = false;
+    this.scheduleshowing = false;
+    this.selectedSchedule = null;
+    this.schedules$ = null;
   }
 }

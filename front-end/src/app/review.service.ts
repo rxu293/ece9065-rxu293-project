@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Course } from './course';
 import { Review } from './review';
+import { Loginres } from './Loginres';
 import { MessageService } from './message.service';
 
 @Injectable({ providedIn: 'root' })
 export class reviewService {
 
   private courseUrl = 'http://localhost:3000/api/open/reviews';  // URL to web api
+  private addReviewUrl = 'http://localhost:3000/api/secure/review';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -32,6 +34,17 @@ export class reviewService {
         catchError(this.handleError<Review[]>('getcoursees', []))
       );
   }
+
+  addReview(jwt: string, subject: string, catalog_nbr: string, content: string):Observable<Loginres>{
+      let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+      let body = {subject:subject, catalog_nbr: catalog_nbr, content: content};
+    return this.http.post<Loginres>(this.addReviewUrl, body, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('addReview'))
+      );
+    }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
