@@ -14,6 +14,8 @@ export class reviewService {
 
   private courseUrl = 'http://localhost:3000/api/open/reviews';  // URL to web api
   private addReviewUrl = 'http://localhost:3000/api/secure/review';
+  private allReviewUrl = 'http://localhost:3000/api/admin/reviews';
+  private changeReviewVisiblityUrl = 'http://localhost:3000/api/admin/review';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -45,6 +47,27 @@ export class reviewService {
         catchError(this.handleError<Loginres>('addReview'))
       );
     }
+
+   getAllReview(jwt: string): Observable<Review[]> {
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+    return this.http.get<Review[]>(this.allReviewUrl, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Review[]>('getReivews', []))
+      );
+  }
+
+    changeReviewVisiblity(jwt: string, subject: string, catalog_nbr: string, modified_time: number, flag: string): Observable<Loginres> {
+    let headers = { 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${jwt}` };
+    let body = {subject:subject, catalog_nbr: catalog_nbr, modified_time: modified_time, flag: flag};
+    return this.http.post<Loginres>(this.changeReviewVisiblityUrl, body, {headers})
+      .pipe(
+        tap(),
+        catchError(this.handleError<Loginres>('changeReviewVisiblity'))
+      );
+  }  
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

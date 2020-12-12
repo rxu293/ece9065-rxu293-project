@@ -20,7 +20,7 @@
       "catalog_nbr": 2053,
       "subject": "ACTURSCI",
       "creator": "testuser5@uwo.ca",
-      "visibility": "public",
+      "visibility": "hidden",
       "modified_time": "2020-12-11T05:40:04.062Z",
       "content": "My favorite course"
     },

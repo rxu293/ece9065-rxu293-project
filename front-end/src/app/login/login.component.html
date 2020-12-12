@@ -105,6 +105,30 @@
      </tr>
   </table>
  </div>
+
+ <div *ngIf = "reviewshowing">
+  <table>
+      <tr>
+          <th>Subject</th>
+          <th>Catalog_nbr</th>
+          <th>Creator</th>
+          <th>Content</th>
+          <th>Modified_time</th>
+          <th>Visibility</th>
+     </tr>
+     <tr *ngFor="let r of reviews$ | async" >
+        <td>{{r.subject}}</td>
+        <td>{{r.catalog_nbr}}</td>
+        <td>{{r.creator}}</td>
+        <td>{{r.content}}</td>
+        <td>{{r.modified_time}}</td>
+        <td>{{r.visibility}}</td>
+        <td><button *ngIf = "r.visibility == 'public'" (click) = "hideReview(r)">Hide this review</button></td>
+        <td><button *ngIf = "r.visibility == 'hidden'" (click) = "publicReivew(r)">Public this review</button></td>
+     </tr>
+  </table>
+        
+ </div>
  <button (click)="logout()">logout</button>
 </div>
 

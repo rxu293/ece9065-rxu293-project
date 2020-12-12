@@ -355,15 +355,21 @@ router.get('/admin/users', authenticateToken, (req, res) =>{
 });
 
 //5.b grant privilige to other user
-router.post('/admin/privilige/:username', (req, res) =>{
+router.post('/admin/privilige/:username', authenticateToken, (req, res) =>{
 	let username = req.params.username;
 	user_db.get("users").find({username:username}).assign({level:"admin"}).write();
 	let msg = {msg: 'successfully set user ' + username + ' as a site manager'};
 	res.send(msg);
 });
 
+//5.b show all reviews
+router.get('/admin/reviews', authenticateToken, (req, res) =>{
+	let data = rv_db.get("reviews").value();
+	res.send(data);
+});
+
 //5.c change hidden flag for a review
-router.post('/admin/review', (req, res) =>{
+router.post('/admin/review', authenticateToken,(req, res) =>{
 	let catacode = req.body.catalog_nbr;
 	let subject = req.body.subject;
 	let time = req.body.modified_time;
@@ -375,7 +381,7 @@ router.post('/admin/review', (req, res) =>{
 });
 
 //5.d change status for a user 
-router.post('/admin/userstatus/:username', (req, res) =>{
+router.post('/admin/userstatus/:username', authenticateToken, (req, res) =>{
 	let username = req.params.username;
 	let flag = req.body.flag;
 	user_db.get("users").find({username:username}).assign({status:flag}).write();

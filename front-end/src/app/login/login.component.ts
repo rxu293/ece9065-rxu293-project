@@ -7,6 +7,7 @@ import { ScheduleService } from '../schedule.service';
 import { reviewService } from '../review.service';
 import { Schedule } from '../Schedule';
 import { user } from '../user';
+import { Review } from '../review';
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   scheduleshowing: boolean;
   reviewadding: boolean;
   usershowing: boolean;
+  reviewshowing: boolean;
   schedule_name: string;
   schedule_visibility: string;
   schedule_description: string;
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
   users$: Observable<user[]>;
   selectedSchedule: Schedule[];
   oldselectedSchedule: Schedule[];
+  reviews$: Observable<Review[]>;
   reviewSubject: string;
   reviewCatalog: string;
   reviewContent: string;
@@ -100,9 +103,11 @@ export class LoginComponent implements OnInit {
     this.schedules$ = null;
     this.reviewadding = false;
     this.usershowing = false;
+    this.reviewshowing = false;
   }
 
   onSelectShow() : void{
+    this.reviewshowing = false;
     this.scheduleadding = false;
     this.scheduleshowing = true;
     this.schedules$ = this.scheduleService.showMySchedules(this.jwt, this.user);
@@ -220,6 +225,7 @@ export class LoginComponent implements OnInit {
     this.selectedSchedule = null;
     this.schedules$ = null;
     this.usershowing = false;
+    this.reviewshowing = false;
   }
 
   checkUsers(): void{
@@ -230,6 +236,18 @@ export class LoginComponent implements OnInit {
     this.schedules$ = null;
     this.users$ = this.userService.getUsers(this.jwt);
     this.usershowing = true;
+    this.reviewshowing = false;
+  }
+
+  checkReviews(): void{
+    this.reviewadding = false;
+    this.scheduleadding = false;
+    this.scheduleshowing = false;
+    this.selectedSchedule = null;
+    this.schedules$ = null;
+    this.reviews$ = this.reviewService.getAllReview(this.jwt);
+    this.usershowing = false;
+    this.reviewshowing = true;
   }
 
   grantAdmin(u : user): void{
@@ -253,6 +271,22 @@ export class LoginComponent implements OnInit {
     subscribe(ret => {
       alert(ret.msg);
       this.checkUsers();
+    })
+  }
+
+  hideReview(r :Review): void{
+    this.reviewService.changeReviewVisiblity(this.jwt, r.subject, r.catalog_nbr, r.modified_time, "hidden").
+    subscribe(ret => {
+      alert(ret.msg);
+      this.checkReviews();
+    })
+  }
+
+  publicReview(r :Review): void{
+    this.reviewService.changeReviewVisiblity(this.jwt, r.subject, r.catalog_nbr, r.modified_time, "public").
+    subscribe(ret => {
+      alert(ret.msg);
+      this.checkReviews();
     })
   }
 }
