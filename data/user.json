@@ -93,6 +93,13 @@
       "status": "active",
       "level": "user",
       "verifylink": "emailverify/testuser3@gmail.com"
+    },
+    {
+      "username": "testu1@uwo.ca",
+      "password": "$2b$10$FiijW3YgTj/h.YXPg6qq1.W.fQwbYA8la723Q.pGGAraIAEOj9O96",
+      "status": "active",
+      "level": "user",
+      "verifylink": "emailverify/testu1@uwo.ca"
     }
   ]
 }
